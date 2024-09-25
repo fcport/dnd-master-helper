@@ -15,9 +15,11 @@
     <button class="btn" id="testButton" (click)="testEngine()"> Test Engine</button>
     <hr>
 
+    <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
+
+
   }
 
-  <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
 
 </div>
 
