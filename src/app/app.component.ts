@@ -35,7 +35,8 @@ export class AppComponent {
     if(this.engine) {
       const messages: ChatCompletionMessage[] = [
         {role: "assistant", content: "You are a helpful AI assistant."},
-      ]
+        {role: "user", content: "What is the capital of France?"},
+      ] as ChatCompletionMessage[];
 
       const reply = await this.engine.chat.completions.create({
         messages,
