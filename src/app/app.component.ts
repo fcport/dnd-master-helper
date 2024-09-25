@@ -1,6 +1,7 @@
 import {Component, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {ChatCompletionMessage, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
+import {ChatCompletionMessage, ChatCompletionRequestBase, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
+import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
 
 
 @Component({
@@ -33,16 +34,19 @@ export class AppComponent {
 
   async testEngine() {
     if(this.engine) {
-      const messages: ChatCompletionMessage[] = [
-        {role: "assistant", content: "You are a helpful AI assistant."},
-        {role: "user", content: "What is the capital of France?"},
-      ] as ChatCompletionMessage[];
+      const messages: ChatCompletionRequestBase = {
+        messages: [
+          {role: "assistant", content: "You are a helpful AI assistant."},
+          {role: "user", content: "What is the capital of France?"},
+        ],
+        stream: false
+      }
 
-      const reply = await this.engine.chat.completions.create({
-        messages,
-      });
-      console.log(reply.choices[0].message);
-      console.log(reply.usage);
+
+      const reply = await this.engine.chat.completions.create(
+        messages
+      );
+      console.log(reply);
     }
   }
 
