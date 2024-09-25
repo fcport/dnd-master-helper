@@ -21,9 +21,12 @@ export class AppComponent {
 
   engine?: MLCEngine
   progress = signal(0)
-  loadingMessage = signal("Loading model...")
+  loadingMessage = signal("Click \"Download engine\" to start loading the model")
   pdfContent = signal("");
 
+  constructor() {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/assets/pdf.worker.min.mjs";
+  }
 
   async initEngine() {
     const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
