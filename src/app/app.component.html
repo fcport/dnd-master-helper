@@ -1,15 +1,20 @@
 <div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3">
 
   <button class="btn m-auto" (click)="initEngine()">Download Engine</button>
+  @if(loadingMessage()){
+    <label> {{loadingMessage()}} </label>
+  }
+
   @if (progress() > 0) {
     <label for="file">Downloading progress:</label>
-    <label> {{loadingMessage()}} </label>
     <progress id="file" [value]="progress()" max="100"></progress>
   }
 
   @if(engine) {
     <label for="testButton">Engine downloaded:</label>
     <button class="btn" id="testButton" (click)="testEngine()"> Test Engine</button>
+    <hr>
+    <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
   }
 
 </div>
