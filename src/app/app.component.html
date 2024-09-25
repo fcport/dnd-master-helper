@@ -1,4 +1,4 @@
-<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3">
+<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3">
 
   <button class="btn m-auto" (click)="initEngine()">Download Engine</button>
   @if (progress() > 0) {
@@ -8,7 +8,7 @@
 
   @if(engine) {
     <label for="testButton">Engine downloaded:</label>
-    <button class="btn" id="testButton" (click)="testEngine()"></button>
+    <button class="btn" id="testButton" (click)="testEngine()"> Test Engine</button>
   }
 
 </div>
