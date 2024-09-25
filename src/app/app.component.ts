@@ -82,7 +82,9 @@ export class AppComponent {
       fullText += textContent.items.map((item: any) => item.str).join(' ');
     }
 
-    this.pdfContent.set(fullText) ;
+    this.pdfContent.set(fullText);
+
+    console.log('PDF content:', fullText);
 
 
     await this.askQuestion()
@@ -94,19 +96,27 @@ export class AppComponent {
 
     const messages: ChatCompletionRequestBase = {
       messages: [
-        {role: "assistant", content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}`},
+        {
+          role: "assistant",
+          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}`
+        },
         {role: "user", content: "What is the content of this document? Can you summarize it?"},
       ],
       stream: false
     }
 
 
-    console.log('asking AI...')
+    console.log('asking AI...');
+    const t1= performance.now()
 
     const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
       messages
     );
-    console.log('AI replied...')
+
+    const t2= performance.now()
+
+
+    console.log('AI replied...', t2-t1);
 
     if ('choices' in reply) {
       console.log(reply.choices[0].message.content);
