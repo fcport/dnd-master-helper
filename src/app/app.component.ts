@@ -85,7 +85,7 @@ export class AppComponent {
     this.pdfContent.set(fullText) ;
 
 
-    this.askQuestion()
+    await this.askQuestion()
   }
 
 
@@ -101,9 +101,13 @@ export class AppComponent {
     }
 
 
+    console.log('asking AI...')
+
     const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
       messages
     );
+    console.log('AI replied...')
+
     if ('choices' in reply) {
       console.log(reply.choices[0].message.content);
 

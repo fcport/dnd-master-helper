@@ -1,4 +1,4 @@
-<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3">
+<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3 panel">
 
   <button class="btn m-auto" (click)="initEngine()">Download Engine</button>
   @if(loadingMessage()){
@@ -16,8 +16,6 @@
     <hr>
 
     <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
-
-
   }
 
 
