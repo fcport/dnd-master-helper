@@ -1,6 +1,6 @@
 import {Component, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
+import {ChatCompletionMessage, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
 
 
 @Component({
@@ -18,21 +18,31 @@ export class AppComponent {
 
 
   async initEngine() {
-
-
     const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
 
-      this.engine = await CreateMLCEngine(
-        selectedModel,
-        {
-          initProgressCallback: (initProgress) => {
-            console.log(initProgress);
-            this.progress.set(Math.floor(initProgress.progress * 100)) ;
-          }
-        },
-      );
+    this.engine = await CreateMLCEngine(
+      selectedModel,
+      {
+        initProgressCallback: (initProgress) => {
+          console.log(initProgress);
+          this.progress.set(Math.floor(initProgress.progress * 100));
+        }
+      },
+    );
+  }
 
+  async testEngine() {
+    if(this.engine) {
+      const messages: ChatCompletionMessage[] = [
+        {role: "assistant", content: "You are a helpful AI assistant."},
+      ]
 
+      const reply = await this.engine.chat.completions.create({
+        messages,
+      });
+      console.log(reply.choices[0].message);
+      console.log(reply.usage);
+    }
   }
 
 
