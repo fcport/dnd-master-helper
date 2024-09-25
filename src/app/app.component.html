@@ -3,6 +3,7 @@
   <button class="btn m-auto" (click)="initEngine()">Download Engine</button>
   @if (progress() > 0) {
     <label for="file">Downloading progress:</label>
+    <label> {{loadingMessage()}} </label>
     <progress id="file" [value]="progress()" max="100"></progress>
   }
 

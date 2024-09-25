@@ -1,7 +1,14 @@
 import {Component, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {ChatCompletionMessage, ChatCompletionRequestBase, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
+import {
+  ChatCompletionChunk,
+  ChatCompletionMessage,
+  ChatCompletionRequestBase,
+  CreateMLCEngine,
+  MLCEngine
+} from "@mlc-ai/web-llm";
 import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
+import * as repl from "node:repl";
 
 
 @Component({
@@ -16,6 +23,7 @@ export class AppComponent {
 
   engine?: MLCEngine
   progress = signal(0)
+  loadingMessage = signal("Loading model...")
 
 
   async initEngine() {
@@ -27,6 +35,7 @@ export class AppComponent {
         initProgressCallback: (initProgress) => {
           console.log(initProgress);
           this.progress.set(Math.floor(initProgress.progress * 100));
+          this.loadingMessage.set(initProgress.text);
         }
       },
     );
@@ -43,10 +52,15 @@ export class AppComponent {
       }
 
 
-      const reply = await this.engine.chat.completions.create(
+      const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
         messages
       );
-      console.log(reply);
+      if('choices' in reply) {
+        console.log(reply.choices[0].message.content);
+
+      }else{
+        console.log("Streamed response:", reply);
+      }
     }
   }
 
