@@ -21,119 +21,37 @@ import {NgOptimizedImage} from "@angular/common";
 export class AppComponent {
   title = 'dnd-master-helper';
 
-  engine?: MLCEngine
-  progress = signal(0)
-  loadingMessage = signal("Click \"Download engine\" to start loading the model")
-  pdfContent = signal("");
-  error = signal("");
 
   constructor() {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "/assets/pdf.worker.min.mjs";
   }
 
-  async initEngine() {
-    const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
-    try {
-      this.engine = await CreateMLCEngine(
-        selectedModel,
-        {
-          initProgressCallback: (initProgress) => {
-            console.log(initProgress);
-            this.progress.set(Math.floor(initProgress.progress * 100));
-            this.loadingMessage.set(initProgress.text);
-          }
-        },
-      );
-    } catch (e: any) {
-      console.log(e);
-      this.error.set(e);
-
-    }
-
-  }
-
-  async testEngine() {
-
-    if (!this.engine) return;
-
-    const messages: ChatCompletionRequestBase = {
-      messages: [
-        {role: "assistant", content: "You are a helpful AI assistant."},
-        {role: "user", content: "What is the capital of France?"},
-      ],
-      stream: false
-    }
+  //
+  // async testEngine() {
+  //
+  //   if (!this.engine) return;
+  //
+  //   const messages: ChatCompletionRequestBase = {
+  //     messages: [
+  //       {role: "assistant", content: "You are a helpful AI assistant."},
+  //       {role: "user", content: "What is the capital of France?"},
+  //     ],
+  //     stream: false
+  //   }
+  //
+  //
+  //   const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
+  //     messages
+  //   );
+  //   if ('choices' in reply) {
+  //     console.log(reply.choices[0].message.content);
+  //
+  //   } else {
+  //     console.log("Streamed response:", reply);
+  //   }
+  //
+  // }
 
 
-    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
-      messages
-    );
-    if ('choices' in reply) {
-      console.log(reply.choices[0].message.content);
-
-    } else {
-      console.log("Streamed response:", reply);
-    }
-
-  }
-
-
-  async onFileSelected(event: any) {
-    if (!event.target) return;
-    const file = event.target.files[0];
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
-
-    let fullText = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const textContent = await page.getTextContent();
-      fullText += textContent.items.map((item: any) => item.str).join(' ');
-    }
-
-    this.pdfContent.set(fullText);
-
-    console.log('PDF content:', fullText);
-
-
-    await this.askQuestion()
-  }
-
-
-  async askQuestion() {
-    if (!this.engine) return;
-
-    const messages: ChatCompletionRequestBase = {
-      messages: [
-        {
-          role: "assistant",
-          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}`
-        },
-        {role: "user", content: "What is the content of this document? Can you summarize it?"},
-      ],
-      stream: false
-    }
-
-
-    console.log('asking AI...');
-    const t1 = performance.now()
-
-    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
-      messages
-    );
-
-    const t2 = performance.now()
-
-
-    console.log('AI replied...', t2 - t1);
-
-    if ('choices' in reply) {
-      console.log(reply.choices[0].message.content);
-
-    } else {
-      console.log("Streamed response:", reply);
-    }
-  }
 }
 
 

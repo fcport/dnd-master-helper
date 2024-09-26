@@ -5,30 +5,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
 
 
-
-html{
-    @apply font-sans bg-gradient-to-b from-licorice to-raisin_black h-full text-gray-800;
+html, body {
+  @apply font-sans h-full;
 }
 
-.title{
+body {
+  @apply bg-gradient-to-b from-licorice to-raisin_black text-gray-800;
+  background-size: cover; /* Ensures the background does not repeat */
+  background-attachment: fixed; /* Optional: makes the background fixed while scrolling */
+}
+
+.title {
   @apply font-cinzel
 }
 
-.error{
-    @apply py-2 px-3 bg-red-800 text-gray-100 ;
+.error {
+  @apply py-2 px-3 bg-red-800 text-gray-100 ;
 }
 
-.panel{
-    @apply bg-gray-100 shadow-md rounded-lg p-4;
+.panel {
+  @apply bg-gray-100 shadow-md rounded-lg p-4;
 }
 
-.btn.primary{
-    @apply text-gray-100 bg-gradient-to-r from-red-600 via-orange-600 to-90% to-stone-500 to-95%
-    py-2 px-4 rounded-lg transition-all;
-  }
+.btn.primary {
+  @apply text-gray-100 bg-gradient-to-r from-red-600 via-orange-600 to-90% to-stone-500 to-95%
+  py-2 px-4 rounded-lg transition-all;
+}
 
-.btn.primary:hover{
-  -webkit-box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0,0,0,0);
-  box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0,0,0,0);
+.btn.primary:hover {
+  -webkit-box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 
 }
