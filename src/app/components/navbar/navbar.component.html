@@ -1,10 +1,18 @@
 <div class="relative top-0 right-0 w-full bg-transparent min-h-3">
   <nav class="flex justify-between items-center p-3 text-white">
     <div class="flex items-center gap-3">
-      <a href="#" class="text-2xl font-bold title">DnD Master Helper</a>
-      <a href="#" class="text-lg title no-underline hover:underline transition-all">Load Docs</a>
-      <a href="#" class="text-lg title no-underline hover:underline transition-all">Ask Questions</a>
-      <a href="#" class="text-lg title no-underline hover:underline transition-all">Support Me</a>
+      <a [routerLink]="['']" class="text-3xl font-bold title">DnD Master Helper</a>
+      <section class="mx-10 flex flex-row flex-nowrap gap-4">
+        <a [routerLink]="['ask-question']" routerLinkActive="active"
+           class="text-xl font-semibold title no-underline hover:underline transition-all">Ask Questions</a>
+        <a [routerLink]="['document-loader']" routerLinkActive="active"
+           class="text-lg title no-underline hover:underline transition-all">Load
+          Docs</a>
+        <a [routerLink]="['support-me']" routerLinkActive="active"
+           class="text-lg title no-underline hover:underline transition-all">Support
+          Me</a>
+      </section>
+
     </div>
   </nav>
 
