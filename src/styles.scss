@@ -11,8 +11,8 @@ html, body {
 
 body {
   @apply bg-gradient-to-b from-licorice to-raisin_black text-gray-100;
-  background-size: cover; /* Ensures the background does not repeat */
-  background-attachment: fixed; /* Optional: makes the background fixed while scrolling */
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .title {
