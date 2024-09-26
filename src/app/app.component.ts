@@ -8,11 +8,13 @@ import {
 } from "@mlc-ai/web-llm";
 import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
 import * as pdfjsLib from 'pdfjs-dist';
+import {NavbarComponent} from "./components/navbar/navbar.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavbarComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -23,6 +25,7 @@ export class AppComponent {
   progress = signal(0)
   loadingMessage = signal("Click \"Download engine\" to start loading the model")
   pdfContent = signal("");
+  error = signal("");
 
   constructor() {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/assets/pdf.worker.min.mjs";
@@ -30,17 +33,23 @@ export class AppComponent {
 
   async initEngine() {
     const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+    try {
+      this.engine = await CreateMLCEngine(
+        selectedModel,
+        {
+          initProgressCallback: (initProgress) => {
+            console.log(initProgress);
+            this.progress.set(Math.floor(initProgress.progress * 100));
+            this.loadingMessage.set(initProgress.text);
+          }
+        },
+      );
+    } catch (e: any) {
+      console.log(e);
+      this.error.set(e);
 
-    this.engine = await CreateMLCEngine(
-      selectedModel,
-      {
-        initProgressCallback: (initProgress) => {
-          console.log(initProgress);
-          this.progress.set(Math.floor(initProgress.progress * 100));
-          this.loadingMessage.set(initProgress.text);
-        }
-      },
-    );
+    }
+
   }
 
   async testEngine() {
@@ -107,16 +116,16 @@ export class AppComponent {
 
 
     console.log('asking AI...');
-    const t1= performance.now()
+    const t1 = performance.now()
 
     const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
       messages
     );
 
-    const t2= performance.now()
+    const t2 = performance.now()
 
 
-    console.log('AI replied...', t2-t1);
+    console.log('AI replied...', t2 - t1);
 
     if ('choices' in reply) {
       console.log(reply.choices[0].message.content);

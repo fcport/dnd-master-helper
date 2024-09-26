@@ -1,8 +1,22 @@
+<app-navbar/>
+<div class="m-auto flex flex-row items-center">
+  <section class="flex flex-col gap-3 mx-10 ">
+    <h1 class="text-6xl title font-bold text-gray-100 ">Lore <br> Keeper</h1>
+    <div class="title text-gray-100">The magic tome that helps masters keeping up with their lore </div>
+    <button class="btn primary my-4" (click)="initEngine()">Download Engine</button>
+
+
+  </section>
+  <img ngSrc="/assets/dragon.png" height="600" width="600" class="dragon" priority>
+
+</div>
+
+
+
 <div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3 panel">
 
-  <button class="btn m-auto" (click)="initEngine()">Download Engine</button>
-  @if(loadingMessage()){
-    <label> {{loadingMessage()}} </label>
+  @if (loadingMessage()) {
+    <label> {{ loadingMessage() }} </label>
   }
 
   @if (progress() > 0) {
@@ -10,7 +24,11 @@
     <progress id="file" [value]="progress()" max="100"></progress>
   }
 
-  @if(engine) {
+  @if (error()) {
+    <div class="error"> {{ error() }}</div>
+  }
+
+  @if (engine) {
     <label for="testButton">Engine downloaded:</label>
     <button class="btn" id="testButton" (click)="testEngine()"> Test Engine</button>
     <hr>
