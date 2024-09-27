@@ -28,6 +28,7 @@ export class EngineService {
       this.engine = await CreateMLCEngine(
         selectedModel,
         {
+          logLevel: "DEBUG",
           initProgressCallback: (initProgress) => {
             console.log(initProgress);
             this.progress.set(Math.floor(initProgress.progress * 100));
@@ -81,7 +82,7 @@ export class EngineService {
 
           `
         },
-        {role: "user", content: "What is the content of this document? Can you summarize it?"},
+        {role: "user", content: "Give me the json"},
       ],
       stream: false
     }
