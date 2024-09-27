@@ -19,6 +19,7 @@ export class DocumentLoaderComponent {
 
   loadDocuments() {
     this.backendArticlesService.getAllArticles().then((articles: any) => {
+      console.log(articles)
       this.articles.set(articles);
     });
   }
