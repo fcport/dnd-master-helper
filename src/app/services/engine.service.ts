@@ -75,7 +75,7 @@ export class EngineService {
           content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}. Summarize the content and return a json like this:
           {
             "title": string, //the title of the content
-            "content": string, //the content NOT summarized but with full informations
+            "content": string, //the full integral content
             "summary": string //the summary of the content
             }
 
