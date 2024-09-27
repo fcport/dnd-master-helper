@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import PouchDB from 'pouchdb';
+import {PouchDbResponse} from "../models/db-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BackendArticlesService {
     return this.db.post(article);
   }
 
-  getAllArticles() {
+  getAllArticles(): Promise<PouchDbResponse> {
     return this.db.allDocs({include_docs: true});
   }
 }

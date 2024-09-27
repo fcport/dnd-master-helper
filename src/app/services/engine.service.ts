@@ -106,7 +106,7 @@ export class EngineService {
     if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
       console.log(JSON.parse(reply.choices[0].message.content));
       const article: Partial<Article> = JSON.parse(reply.choices[0].message.content);
-      await this.backendArticlesService.addArticle({article, content: this.pdfContent()}).then((res: any) => {
+      await this.backendArticlesService.addArticle({...article, content: this.pdfContent()}).then((res: any) => {
 
         console.log('Article added:', res);
       });
