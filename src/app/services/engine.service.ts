@@ -1,7 +1,9 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import * as pdfjsLib from "pdfjs-dist";
 import {ChatCompletionChunk, ChatCompletionRequestBase, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
 import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
+import {Article} from "../models/article.model";
+import {BackendArticlesService} from "./backend-articles.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class EngineService {
   progress = signal(0)
   loadingMessage = signal("Click \"Download engine\" to start loading the model")
   error = signal("");
+
+  backendArticlesService = inject(BackendArticlesService);
 
 
   constructor() {
@@ -62,11 +66,11 @@ export class EngineService {
     console.log('PDF content:', fullText);
 
 
-    await this.askQuestion()
+    await this.generateSummary()
   }
 
 
-  async askQuestion() {
+  async generateSummary() {
     if (!this.engine) return;
 
     const messages: ChatCompletionRequestBase = {
@@ -99,8 +103,13 @@ export class EngineService {
 
     console.log('AI replied...', t2 - t1);
 
-    if ('choices' in reply) {
-      console.log(reply.choices[0].message.content);
+    if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
+      console.log(JSON.parse(reply.choices[0].message.content));
+      const article: Partial<Article> = JSON.parse(reply.choices[0].message.content);
+      await this.backendArticlesService.addArticle(article).then((res: any) => {
+        console.log('Article added:', res);
+      });
+
 
     } else {
       console.log("Streamed response:", reply);
