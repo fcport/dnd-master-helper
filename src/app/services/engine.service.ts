@@ -18,6 +18,8 @@ export class EngineService {
   loadingMessage = signal("Click \"Download engine\" to start loading the model")
   error = signal("");
 
+  loadingEngine = signal(false);
+
   backendArticlesService = inject(BackendArticlesService);
 
 
@@ -27,6 +29,7 @@ export class EngineService {
 
 
   async initEngine() {
+    this.loadingEngine.set(true);
     const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
     try {
       this.engine = await CreateMLCEngine(
@@ -37,12 +40,16 @@ export class EngineService {
             console.log(initProgress);
             this.progress.set(Math.floor(initProgress.progress * 100));
             this.loadingMessage.set(initProgress.text);
+            this.loadingEngine.set(false);
+
           }
         },
       );
     } catch (e: any) {
       console.log(e);
       this.error.set(e);
+      this.loadingEngine.set(false);
+
     }
 
   }
