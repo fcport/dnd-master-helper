@@ -40,7 +40,6 @@ export class EngineService {
             console.log(initProgress);
             this.progress.set(Math.floor(initProgress.progress * 100));
             this.loadingMessage.set(initProgress.text);
-            this.loadingEngine.set(false);
 
           }
         },
@@ -48,6 +47,9 @@ export class EngineService {
     } catch (e: any) {
       console.log(e);
       this.error.set(e);
+      this.loadingEngine.set(false);
+
+    } finally {
       this.loadingEngine.set(false);
 
     }
