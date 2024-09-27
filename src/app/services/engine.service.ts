@@ -19,7 +19,6 @@ export class EngineService {
 
   constructor() {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/assets/pdf.worker.min.mjs";
-
   }
 
 
@@ -39,7 +38,6 @@ export class EngineService {
     } catch (e: any) {
       console.log(e);
       this.error.set(e);
-
     }
 
   }
@@ -74,7 +72,14 @@ export class EngineService {
       messages: [
         {
           role: "assistant",
-          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}`
+          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}. Summarize the content and return a json like this:
+          {
+            "title": string, //the title of the content
+            "content": string, //the content NOT summarized but with full informations
+            "summary": string //the summary of the content
+            }
+
+          `
         },
         {role: "user", content: "What is the content of this document? Can you summarize it?"},
       ],

@@ -20,6 +20,7 @@
     "@angular/router": "^18.2.0",
     "@mlc-ai/web-llm": "^0.2.66",
     "pdfjs-dist": "^4.6.82",
+    "pouchdb": "^9.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -29,6 +30,7 @@
     "@angular/cli": "^18.2.5",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/pouchdb": "^6.4.2",
     "autoprefixer": "^10.4.20",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
