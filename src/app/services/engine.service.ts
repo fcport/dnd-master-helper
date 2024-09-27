@@ -78,10 +78,10 @@ export class EngineService {
             "title": string, //the title of the content
             "summary": string //the summary of the content
             }
-
+          Your answer should ONLY contain the json, nothing else.
           `
         },
-        {role: "user", content: "Give me the json"},
+        {role: "user", content: "Give me the json, dont add anything else more than the json"},
       ],
       stream: false
     }
