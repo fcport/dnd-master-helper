@@ -20,7 +20,8 @@ export interface Doc {
   _id: string;
   _rev: string;
   title?: string | null;
-  summary?: string | null;
+  summary?: string | null
+  originalDocumentTitle?: string | null
 }
 
 

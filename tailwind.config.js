@@ -96,7 +96,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {...colorNew},
-      fontFamily: {...fontFamily, cinzel: ['Cinzel', 'serif']},
+      fontFamily: {
+        ...fontFamily, cinzel: ['Cinzel', 'serif'], raleway: ['Raleway', 'serif']
+      },
     },
   },
   plugins: [],

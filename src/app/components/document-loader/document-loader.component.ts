@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {EngineService} from "../../services/engine.service";
 import {BackendArticlesService} from "../../services/backend-articles.service";
 import {CommonModule} from "@angular/common";
@@ -12,16 +12,19 @@ import {articlesStubs} from "../../stubs/articles.stub";
   templateUrl: './document-loader.component.html',
   styleUrl: './document-loader.component.scss'
 })
-export class DocumentLoaderComponent {
+export class DocumentLoaderComponent implements OnInit {
 
   engineService = inject(EngineService);
   backendArticlesService = inject(BackendArticlesService);
 
   articles = signal<Omit<Doc, '_rev'>[]>([])
 
+  ngOnInit() {
+    this.loadDocuments();
+  }
+
   loadDocuments() {
     this.backendArticlesService.getAllArticles().then((articles) => {
-      console.log(articles)
       this.articles.set(articles.rows!.map((row) => row.doc));
 
       if (articles.rows!.length === 0) {

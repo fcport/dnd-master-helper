@@ -3,10 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
-  @apply font-sans h-full;
+  @apply font-raleway h-full;
+
 }
 
 body {
@@ -32,22 +33,28 @@ body {
   py-2 px-4 rounded-lg transition-all;
 }
 
-.btn.secondary {
-  @apply text-gray-100 bg-black_bean-600 bg-opacity-85
-  py-2 px-4 rounded-lg transition-all;
 
-
+.nice-borders {
   background: linear-gradient(#3a1e19, #3a1e19) padding-box,
   linear-gradient(to right, rgba(255, 0, 0, 0.6), rgba(255, 128, 13, 0.9)) border-box;
   //border-radius: 50em;
   border: 2px solid transparent;
+}
+
+.btn.secondary {
+  @apply text-gray-100 bg-black_bean-600 bg-opacity-85
+  py-2 px-4 rounded-lg transition-all nice-borders;
+
+  //
+  //background: linear-gradient(#3a1e19, #3a1e19) padding-box,
+  //linear-gradient(to right, rgba(255, 0, 0, 0.6), rgba(255, 128, 13, 0.9)) border-box;
+  ////border-radius: 50em;
+  //border: 2px solid transparent;
 
 }
 
 .btn.secondary:hover {
   @apply bg-yellow-300;
-
-
 }
 
 

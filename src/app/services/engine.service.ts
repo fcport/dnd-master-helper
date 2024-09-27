@@ -53,6 +53,7 @@ export class EngineService {
     const file = event.target.files[0];
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+    const title = file.name;
 
     let fullText = '';
     for (let i = 1; i <= pdf.numPages; i++) {
@@ -66,11 +67,11 @@ export class EngineService {
     console.log('PDF content:', fullText);
 
 
-    await this.generateSummary()
+    await this.generateSummary(title)
   }
 
 
-  async generateSummary() {
+  async generateSummary(originalDocumentTitle: string = '') {
     if (!this.engine) return;
 
     const messages: ChatCompletionRequestBase = {
@@ -106,7 +107,11 @@ export class EngineService {
     if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
       console.log(JSON.parse(reply.choices[0].message.content));
       const article: Partial<Article> = JSON.parse(reply.choices[0].message.content);
-      await this.backendArticlesService.addArticle({...article, content: this.pdfContent()}).then((res: any) => {
+      await this.backendArticlesService.addArticle({
+        ...article,
+        content: this.pdfContent(),
+        originalDocumentTitle: originalDocumentTitle
+      }).then((res: any) => {
 
         console.log('Article added:', res);
       });
