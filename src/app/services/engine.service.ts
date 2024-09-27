@@ -72,7 +72,7 @@ export class EngineService {
       messages: [
         {
           role: "assistant",
-          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}. Summarize the content and return a json like this:
+          content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}. Return a json like this:
           {
             "title": string, //the title of the content
             "content": string, //the full integral content
