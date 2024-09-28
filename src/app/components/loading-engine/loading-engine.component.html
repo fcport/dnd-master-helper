@@ -1,7 +1,19 @@
-<div class="z-10 backdrop-blur-2xl w-screen h-screen">
-  <h1 class="title m-auto">Loading Engine...</h1>
-  <div class="m-auto">
-    <div>{{ engineService.loadingMessage() }}</div>
+<div class="z-10 backdrop-blur-2xl w-screen h-screen flex items-center -mt-5">
+  <div class="m-auto text-center w-4/5 md:w-2/3 lg:w-2/5">
+    @if (engineService.loadingEngine()) {
+      <h1 class="title text-5xl">Loading Engine</h1>
+      <h1 class="title text-5xl loading mb-5"></h1>
+      <div>{{ engineService.loadingMessage() }}</div>
+
+    }
+
+    @if (engineService.error()) {
+      <h1 class="title text-5xl">There was an error! </h1>
+      <div class="title text-2xl mb-5">Quick roll saving throw on CONST</div>
+      <div class="nice-borders p-4">{{ engineService.error() }}</div>
+    }
+
   </div>
+
 
 </div>
