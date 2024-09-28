@@ -4,13 +4,18 @@ import {BackendArticlesService} from "../../services/backend-articles.service";
 import {CommonModule} from "@angular/common";
 import {Doc} from "../../models/db-response.model";
 import {articlesStubs} from "../../stubs/articles.stub";
+import {NgIconComponent, provideIcons} from "@ng-icons/core";
+import {jamSkull} from "@ng-icons/jam-icons"
 
 @Component({
   selector: 'app-document-loader',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgIconComponent],
   templateUrl: './document-loader.component.html',
-  styleUrl: './document-loader.component.scss'
+  styleUrl: './document-loader.component.scss',
+  providers: [provideIcons({
+    jamSkull
+  })]
 })
 export class DocumentLoaderComponent implements OnInit {
 

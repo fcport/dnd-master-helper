@@ -43,13 +43,17 @@
           <tr>
             <th class="text-left text-lg">Title</th>
             <th class="text-left text-lg">Original Title</th>
+            <th class="text-lg">Actions</th>
           </tr>
           </thead>
           <tbody>
             @for (article of articles(); track $index) {
-              <tr>
+              <tr class="items-center">
                 <td>{{ article.title }}</td>
                 <td>{{ article.originalDocumentTitle }}</td>
+                <td class="text-center text-xl text-red-500 cursor-pointer">
+                  <ng-icon name="jamSkull"></ng-icon>
+                </td>
               </tr>
             }
           </tbody>

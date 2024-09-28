@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@mlc-ai/web-llm": "^0.2.66",
+    "@ng-icons/core": "^29.5.0",
+    "@ng-icons/jam-icons": "^29.5.0",
     "pdfjs-dist": "^4.6.82",
     "pouchdb": "^9.0.0",
     "rxjs": "~7.8.0",
