@@ -6,6 +6,7 @@ import {Doc} from "../../models/db-response.model";
 import {articlesStubs} from "../../stubs/articles.stub";
 import {NgIconComponent, provideIcons} from "@ng-icons/core";
 import {jamSkull} from "@ng-icons/jam-icons"
+import {addWarning} from "@angular-devkit/build-angular/src/utils/webpack-diagnostics";
 
 @Component({
   selector: 'app-document-loader',
@@ -28,6 +29,12 @@ export class DocumentLoaderComponent implements OnInit {
     this.loadDocuments();
   }
 
+  async uploadDocument(event: any) {
+    await this.engineService.onFileSelected(event);
+    this.loadDocuments()
+
+  }
+
   loadDocuments() {
     this.backendArticlesService.getAllArticles().then((articles) => {
       this.articles.set(articles.rows!.map((row) => row.doc));
@@ -45,9 +52,10 @@ export class DocumentLoaderComponent implements OnInit {
   }
 
   deleteDocument(_id: string, _rev: string) {
-    this.backendArticlesService.deleteArticle(_id, _rev).then(() => {
-      this.loadDocuments();
-    });
-
+    if (confirm("Are you sure you want to delete this document? (Cancel to abort)")) {
+      this.backendArticlesService.deleteArticle(_id, _rev).then(() => {
+        this.loadDocuments();
+      });
+    }
   }
 }
