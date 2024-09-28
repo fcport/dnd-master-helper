@@ -44,8 +44,8 @@ export class DocumentLoaderComponent implements OnInit {
     });
   }
 
-  deleteDocument(_id: string) {
-    this.backendArticlesService.deleteArticle(_id).then(() => {
+  deleteDocument(_id: string, _rev: string) {
+    this.backendArticlesService.deleteArticle(_id, _rev).then(() => {
       this.loadDocuments();
     });
 
