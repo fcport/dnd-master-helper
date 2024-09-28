@@ -19,4 +19,8 @@ export class BackendArticlesService {
   getAllArticles(): Promise<PouchDbResponse> {
     return this.db.allDocs({include_docs: true});
   }
+
+  deleteArticle(_id: string, _rev: string) {
+    return this.db.remove(_id, _rev);
+  }
 }

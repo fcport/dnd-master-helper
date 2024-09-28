@@ -1,4 +1,4 @@
-<div class="p-3 flex flex-col gap-4 w-full md:w-2/3 lg:w-2/5 ">
+<div class="p-3 flex flex-col gap-4 w-full md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto">
 
   <section class="p-2">
     <label for="inputFile" class="mr-3">Upload New Docs</label>
@@ -48,11 +48,12 @@
           </thead>
           <tbody>
             @for (article of articles(); track $index) {
-              <tr class="items-center">
-                <td>{{ article.title }}</td>
-                <td>{{ article.originalDocumentTitle }}</td>
-                <td class="text-center text-xl text-red-500 cursor-pointer">
-                  <ng-icon name="jamSkull"></ng-icon>
+              <tr
+                class="items-center border-gray-600 border-b-[1px] border-solid bg-transparent hover:bg-black_bean-500 transition-all">
+                <td class="p-3">{{ article.title }}</td>
+                <td class="p-3">{{ article.originalDocumentTitle }}</td>
+                <td class="text-center flex align-baseline text-xl text-red-500 cursor-pointer items-center p-3">
+                  <ng-icon name="jamSkull" (click)="deleteDocument(article._id)"></ng-icon>
                 </td>
               </tr>
             }

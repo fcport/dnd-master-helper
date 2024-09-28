@@ -22,7 +22,7 @@ export class DocumentLoaderComponent implements OnInit {
   engineService = inject(EngineService);
   backendArticlesService = inject(BackendArticlesService);
 
-  articles = signal<Omit<Doc, '_rev'>[]>([])
+  articles = signal<Doc[]>([])
 
   ngOnInit() {
     this.loadDocuments();
@@ -34,7 +34,7 @@ export class DocumentLoaderComponent implements OnInit {
 
       if (articles.rows!.length === 0) {
 
-        const articlesMapped = articlesStubs.articlesStubs["by-sequence"]
+        const articlesMapped = articlesStubs.articlesStubs["by-sequence"] as unknown as Doc[]
 
         this.articles.set(
           articlesMapped
@@ -44,4 +44,10 @@ export class DocumentLoaderComponent implements OnInit {
     });
   }
 
+  deleteDocument(_id: string) {
+    this.backendArticlesService.deleteArticle(_id).then(() => {
+      this.loadDocuments();
+    });
+
+  }
 }
