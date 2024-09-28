@@ -53,7 +53,8 @@
                 <td class="p-3">{{ article.title }}</td>
                 <td class="p-3">{{ article.originalDocumentTitle }}</td>
                 <td class="text-center flex align-baseline text-xl text-red-500 cursor-pointer items-center p-3">
-                  <ng-icon name="jamSkull" (click)="deleteDocument(article._id, article._rev)"></ng-icon>
+                  <ng-icon name="jamSkull" class="transition-all hover:text-2xl hover:text-red-300"
+                           (click)="deleteDocument(article._id, article._rev)"></ng-icon>
                 </td>
               </tr>
             }
