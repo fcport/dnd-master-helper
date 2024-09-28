@@ -4,6 +4,7 @@ import {ChatCompletionChunk, ChatCompletionRequestBase, CreateMLCEngine, MLCEngi
 import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
 import {Article} from "../models/article.model";
 import {BackendArticlesService} from "./backend-articles.service";
+import {TokenTextSplitter} from "@langchain/textsplitters";
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,6 @@ export class EngineService {
     } catch (e: any) {
       console.log(e);
       this.error.set(e);
-      this.loadingEngine.set(false);
 
     } finally {
       this.loadingEngine.set(false);
@@ -75,13 +75,22 @@ export class EngineService {
 
     console.log('PDF content:', fullText);
 
-
     await this.generateSummary(title)
   }
 
 
   async generateSummary(originalDocumentTitle: string = '') {
     if (!this.engine) return;
+
+
+    const textSplitter = new TokenTextSplitter({
+      chunkSize: 3000,
+      chunkOverlap: 0,
+    });
+
+    const texts = await textSplitter.splitText(this.pdfContent());
+
+    console.log(texts);
 
     const messages: ChatCompletionRequestBase = {
       messages: [
