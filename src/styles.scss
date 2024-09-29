@@ -81,3 +81,13 @@ body {
   }
 }
 
+input {
+  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800 nice-borders;
+}
+
+textarea {
+  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800 nice-borders;
+}
+
+
+

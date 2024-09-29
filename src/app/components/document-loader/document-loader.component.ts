@@ -1,4 +1,4 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, model, OnInit, signal} from '@angular/core';
 import {EngineService} from "../../services/engine.service";
 import {BackendArticlesService} from "../../services/backend-articles.service";
 import {CommonModule} from "@angular/common";
@@ -9,11 +9,12 @@ import {jamSkull} from "@ng-icons/jam-icons"
 import {DocumentsService} from "../../services/documents.service";
 import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments} from "../../store/loading-slice";
 import {injectAppSelector} from "../../injectables";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-document-loader',
   standalone: true,
-  imports: [CommonModule, NgIconComponent],
+  imports: [CommonModule, NgIconComponent, FormsModule],
   templateUrl: './document-loader.component.html',
   styleUrl: './document-loader.component.scss',
   providers: [provideIcons({
@@ -27,7 +28,16 @@ export class DocumentLoaderComponent implements OnInit {
 
   articles = this.documentsService.documentsSortedAlphabetically;
 
-  
+  articlesFiltered = computed(() => {
+    return this.articles().filter((doc: Doc) => {
+      return doc.title!.toLowerCase().includes(this.filter().toLowerCase()) ||
+        doc.originalDocumentTitle!.toLowerCase().includes(this.filter().toLowerCase())
+    })
+  })
+
+  filter = model("")
+
+
   loadingDocumentsMessage = injectAppSelector(selectLoadingDocumentsMessage)
   isLoadingDocuments = injectAppSelector(selectTotalLoadingDocuments)
 
