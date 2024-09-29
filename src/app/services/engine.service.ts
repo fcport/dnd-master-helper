@@ -124,10 +124,10 @@ export class EngineService {
             this os the original title of the document: ${originalDocumentTitle}.
             ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length},
              here's the previous part's summary ` + this.previousSummary() + '. The title has to be: ' +
-              this.previousTitle() + '-p' + (index + 1) : ''}. Return a json like this:
+              this.previousTitle() + '-p' + (String(index + 1).padStart(2, '0')) : ''}. Return a json like this:
           {
             "title": string, //the title of the content. ${index !== 0 ? ' The title MUST be: ' +
-              this.previousTitle() + '-p' + (index + 1) : 'The title should recall the original document name if it is ' +
+              this.previousTitle() + '-p' + (String(index + 1).padStart(2, '0')) : 'The title should recall the original document name if it is ' +
               'significant otherwise you can use a generic title based on the content'},
             "summary": string //the summary of the content
             }
