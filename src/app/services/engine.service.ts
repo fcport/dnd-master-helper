@@ -32,6 +32,7 @@ export class EngineService {
   backendArticlesService = inject(BackendArticlesService);
 
   previousSummary = signal("");
+  previousTitle = signal("");
   dispatch = injectAppDispatch();
 
 
@@ -106,7 +107,7 @@ export class EngineService {
 
     for (const text of texts) {
       const index = texts.indexOf(text);
-      this.dispatch(setLoadingDocumentNumber(index));
+      this.dispatch(setLoadingDocumentNumber(index + 1));
 
 
       const messages: ChatCompletionRequestBase = {
@@ -114,9 +115,11 @@ export class EngineService {
           {
             role: "assistant",
             content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text}
-            ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length}, here's the previous part's summary ` + this.previousSummary() : ''}. Return a json like this:
+            ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length},
+             here's the previous part's summary ` + this.previousSummary() + '. The title has to be: ' +
+              this.previousTitle() + '-p' + (index + 1) : ''}. Return a json like this:
           {
-            "title": string, //the title of the content
+            "title": string, //the title of the content if
             "summary": string //the summary of the content
             }
           Your answer should ONLY contain the json, nothing else.
@@ -138,19 +141,20 @@ export class EngineService {
       const t2 = performance.now()
 
 
-      console.log('AI replied...', t2 - t1);
+      console.log('AI replied in...', t2 - t1);
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         console.log(JSON.parse(reply.choices[0].message.content));
         const article: Partial<Article> = JSON.parse(reply.choices[0].message.content);
-        this.backendArticlesService.addArticle({
+        const backendResponse = await this.backendArticlesService.addArticle({
           ...article,
           content: this.pdfContent(),
           originalDocumentTitle: originalDocumentTitle
-        }).then((res: any) => {
-          this.previousSummary.set(article.summary || '');
-          console.log('Article added:', res);
-        });
+        })
+
+        this.previousSummary.set(article.summary || '');
+        this.previousTitle.set(article.title || '');
+        console.log('Article added:', backendResponse);
 
 
       } else {
