@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable} from '@angular/core';
 import {BackendArticlesService} from "./backend-articles.service";
 import {injectAppDispatch, injectAppSelector} from "../injectables";
 import {articlesStubs} from "../stubs/articles.stub";
@@ -14,6 +14,18 @@ export class DocumentsService {
   dispatch = injectAppDispatch();
 
   documents = injectAppSelector(selectDocuments);
+  documentsSortedAlphabetically = computed(() => {
+    if (this.documents().length === 0) return [];
+    return Array.from(this.documents()).sort((a, b) => {
+      if (a.title! < b.title!) {
+        return -1;
+      }
+      if (a.title! > b.title!) {
+        return 1;
+      }
+      return 1
+    })
+  })
 
   async fetchDocuments() {
     const articles = await this.backendArticlesService.getAllArticles()

@@ -25,25 +25,9 @@ export class DocumentLoaderComponent implements OnInit {
   engineService = inject(EngineService);
   documentsService = inject(DocumentsService)
 
-  articles = this.documentsService.documents
+  articles = this.documentsService.documentsSortedAlphabetically;
 
-  sortedDocumentsAlphabetically = computed(() => {
-
-
-    if (this.articles().length === 0) return [];
-    return Array.from(this.articles()).sort((a, b) => {
-      if (a.title! < b.title!) {
-        return -1;
-      }
-      if (a.title! > b.title!) {
-        return 1;
-      }
-      return 1
-    })
-
-
-  })
-
+  
   loadingDocumentsMessage = injectAppSelector(selectLoadingDocumentsMessage)
   isLoadingDocuments = injectAppSelector(selectTotalLoadingDocuments)
 
