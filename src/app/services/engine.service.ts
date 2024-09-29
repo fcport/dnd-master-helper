@@ -159,7 +159,7 @@ export class EngineService {
           ...article,
           content: this.pdfContent(),
           originalDocumentTitle: originalDocumentTitle,
-          title: texts.length > 1 && index === 0 ? article.title + '-p1' : article.title
+          title: texts.length > 1 && index === 0 ? article.title + '-p01' : article.title
         })
 
         this.previousSummary.set(article.summary || '');
