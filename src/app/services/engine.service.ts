@@ -97,10 +97,11 @@ export class EngineService {
 
     const textSplitter = new TokenTextSplitter({
       chunkSize: 3000,
-      chunkOverlap: 0,
+      chunkOverlap: 400,
     });
 
     const texts = await textSplitter.splitText(this.pdfContent());
+
 
     this.dispatch(setTotalLoadingDocuments(texts.length));
 
@@ -114,13 +115,15 @@ export class EngineService {
         messages: [
           {
             role: "assistant",
-            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text}, this os the original title of the document: ${originalDocumentTitle}.
+            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text},
+            this os the original title of the document: ${originalDocumentTitle}.
             ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length},
              here's the previous part's summary ` + this.previousSummary() + '. The title has to be: ' +
               this.previousTitle() + '-p' + (index + 1) : ''}. Return a json like this:
           {
-            "title": string, //the title of the content ${index !== 0 ? ' The title MUST be: ' +
-              this.previousTitle() + '-p' + (index + 1) : ''}
+            "title": string, //the title of the content. ${index !== 0 ? ' The title MUST be: ' +
+              this.previousTitle() + '-p' + (index + 1) : 'The title should recall the original document name if it is ' +
+              'significant otherwise you can use a generic title based on the content'},
             "summary": string //the summary of the content
             }
           Your answer should ONLY contain the json, nothing else.
@@ -150,7 +153,8 @@ export class EngineService {
         const backendResponse = await this.backendArticlesService.addArticle({
           ...article,
           content: this.pdfContent(),
-          originalDocumentTitle: originalDocumentTitle
+          originalDocumentTitle: originalDocumentTitle,
+          title: texts.length > 1 && index === 0 ? article.title + '-p1' : article.title
         })
 
         this.previousSummary.set(article.summary || '');
