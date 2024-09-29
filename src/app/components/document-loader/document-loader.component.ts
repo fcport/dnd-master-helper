@@ -28,7 +28,7 @@ export class DocumentLoaderComponent implements OnInit {
   articles = this.documentsService.documents
 
   sortedDocumentsAphabetically = computed(() =>
-    this.articles.length === 0 ? [] :
+    this.articles().length === 0 ? [] :
       this.articles().sort(
         (a: Doc, b: Doc) => {
           if (a.title! < b.title!) {
