@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {EngineService} from "../../services/engine.service";
 import {BackendArticlesService} from "../../services/backend-articles.service";
 import {CommonModule} from "@angular/common";
@@ -26,6 +26,17 @@ export class DocumentLoaderComponent implements OnInit {
   documentsService = inject(DocumentsService)
 
   articles = this.documentsService.documents
+
+  sortedDocumentsAphabetically = computed(() => this.articles().sort(
+    (a: Doc, b: Doc) => {
+      if (a.title! < b.title!) {
+        return -1;
+      }
+      if (a.title! > b.title!) {
+        return 1;
+      }
+      return 1
+    }))
 
   loadingDocumentsMessage = injectAppSelector(selectLoadingDocumentsMessage)
   isLoadingDocuments = injectAppSelector(selectTotalLoadingDocuments)

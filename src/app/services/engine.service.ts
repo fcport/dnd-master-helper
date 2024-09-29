@@ -1,4 +1,4 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import * as pdfjsLib from "pdfjs-dist";
 import {ChatCompletionChunk, ChatCompletionRequestBase, CreateMLCEngine, MLCEngine} from "@mlc-ai/web-llm";
 import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion";
@@ -32,7 +32,12 @@ export class EngineService {
   backendArticlesService = inject(BackendArticlesService);
 
   previousSummary = signal("");
-  previousTitle = signal("");
+  previousTitleRaw = signal("");
+  previousTitle = computed(() => {
+    //removes any occurence of -p<number> from the title
+    return this.previousTitleRaw().replace(/-p\d+$/, '');
+  });
+
   dispatch = injectAppDispatch();
 
 
@@ -158,7 +163,7 @@ export class EngineService {
         })
 
         this.previousSummary.set(article.summary || '');
-        this.previousTitle.set(article.title || '');
+        this.previousTitleRaw.set(article.title || '');
         console.log('Article added:', backendResponse);
 
 
