@@ -34,7 +34,7 @@
   <section class="m-4">
     <h2 class="text-2xl title my-2">All documents</h2>
 
-    @if (sortedDocumentsAphabetically().length > 0) {
+    @if (sortedDocumentsAlphabetically().length > 0) {
 
       <div class="flex flex-col text-white my-2">
 
@@ -47,7 +47,7 @@
           </tr>
           </thead>
           <tbody>
-            @for (article of sortedDocumentsAphabetically(); track $index) {
+            @for (article of sortedDocumentsAlphabetically(); track $index) {
               <tr
                 class="items-center border-gray-600 border-b-[1px] border-solid bg-transparent hover:bg-black_bean-500 transition-all">
                 <td class="p-3">{{ article.title }}</td>
