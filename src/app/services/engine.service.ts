@@ -113,7 +113,7 @@ export class EngineService {
         messages: [
           {
             role: "assistant",
-            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${this.pdfContent()}
+            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text}
             ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length}, here's the previous part's summary ` + this.previousSummary() : ''}. Return a json like this:
           {
             "title": string, //the title of the content
