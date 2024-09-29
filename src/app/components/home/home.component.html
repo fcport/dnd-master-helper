@@ -1,7 +1,7 @@
 <div class="m-auto flex flex-row items-center">
   <section class="flex flex-col gap-3 mx-10 ">
     <h1 class="text-6xl title font-bold text-gray-100 ">Lore <br> Keeper</h1>
-    <div class="title text-gray-100">The magic tome that helps masters keeping up with their lore </div>
+    <div class="title text-gray-100">The magic tome that helps masters keeping up with their lore</div>
     <button class="btn primary my-4" (click)="engineService.initEngine()">Download Engine</button>
 
 
@@ -11,27 +11,25 @@
 </div>
 
 
+<!--<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3 panel">-->
+
+<!--  @if (engineService.loadingMessage()) {-->
+<!--    <label> {{ engineService.loadingMessage() }} </label>-->
+<!--  }-->
+
+<!--  @if (engineService.progress() > 0) {-->
+<!--    <label for="file">Downloading progress:</label>-->
+<!--    <progress id="file" [value]="engineService.progress()" max="100"></progress>-->
+<!--  }-->
+
+<!--  @if (engineService.error()) {-->
+<!--    <div class="error"> {{ engineService.error() }}</div>-->
+<!--  }-->
+
+<!--  @if (engineService.engine) {-->
+
+<!--    <input type="file" (change)="engineService.onFileSelected($event)" accept="application/pdf">-->
+<!--  }-->
 
 
-<div class="m-auto w-[90%] md:w-[60%] lg:w-[40%] shadow rounded p-3 my-3 flex flex-col gap-3 panel">
-
-  @if (engineService.loadingMessage()) {
-    <label> {{ engineService.loadingMessage() }} </label>
-  }
-
-  @if (engineService.progress() > 0) {
-    <label for="file">Downloading progress:</label>
-    <progress id="file" [value]="engineService.progress()" max="100"></progress>
-  }
-
-  @if (engineService.error()) {
-    <div class="error"> {{ engineService.error() }}</div>
-  }
-
-  @if (engineService.engine) {
-
-    <input type="file" (change)="engineService.onFileSelected($event)" accept="application/pdf">
-  }
-
-
-</div>
+<!--</div>-->
