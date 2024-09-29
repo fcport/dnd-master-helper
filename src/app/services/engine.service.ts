@@ -114,12 +114,13 @@ export class EngineService {
         messages: [
           {
             role: "assistant",
-            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text}
+            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text}, this os the original title of the document: ${originalDocumentTitle}.
             ${index !== 0 ? ` This is the part ${index + 1} of a split document of ${texts.length},
              here's the previous part's summary ` + this.previousSummary() + '. The title has to be: ' +
               this.previousTitle() + '-p' + (index + 1) : ''}. Return a json like this:
           {
-            "title": string, //the title of the content if
+            "title": string, //the title of the content ${index !== 0 ? ' The title MUST be: ' +
+              this.previousTitle() + '-p' + (index + 1) : ''}
             "summary": string //the summary of the content
             }
           Your answer should ONLY contain the json, nothing else.
