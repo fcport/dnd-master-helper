@@ -7,6 +7,8 @@ import {articlesStubs} from "../../stubs/articles.stub";
 import {NgIconComponent, provideIcons} from "@ng-icons/core";
 import {jamSkull} from "@ng-icons/jam-icons"
 import {DocumentsService} from "../../services/documents.service";
+import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments} from "../../store/loading-slice";
+import {injectAppSelector} from "../../injectables";
 
 @Component({
   selector: 'app-document-loader',
@@ -24,6 +26,9 @@ export class DocumentLoaderComponent implements OnInit {
   documentsService = inject(DocumentsService)
 
   articles = this.documentsService.documents
+
+  loadingDocumentsMessage = injectAppSelector(selectLoadingDocumentsMessage)
+  isLoadingDocuments = injectAppSelector(selectTotalLoadingDocuments)
 
   ngOnInit() {
     this.loadDocuments();
