@@ -20,7 +20,7 @@ import {
 export class EngineService {
 
   pdfContent = signal("");
-  engine?: MLCEngine
+  engine = signal<MLCEngine | null>(null)
 
 
   progress = signal(0)
@@ -50,7 +50,7 @@ export class EngineService {
     this.loadingEngine.set(true);
     const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
     try {
-      this.engine = await CreateMLCEngine(
+      const engine = await CreateMLCEngine(
         selectedModel,
         {
           logLevel: "DEBUG",
@@ -61,7 +61,9 @@ export class EngineService {
 
           }
         },
-      );
+      )
+
+      this.engine.set(engine);
     } catch (e: any) {
       console.log(e);
       this.error.set(e);
@@ -97,7 +99,7 @@ export class EngineService {
 
 
   async generateSummary(originalDocumentTitle: string = '') {
-    if (!this.engine) return;
+    if (!this.engine()) return;
 
 
     const textSplitter = new TokenTextSplitter({
@@ -143,7 +145,7 @@ export class EngineService {
       console.log('asking AI...');
       const t1 = performance.now()
 
-      const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine.chat.completions.create(
+      const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
         messages
       );
 
