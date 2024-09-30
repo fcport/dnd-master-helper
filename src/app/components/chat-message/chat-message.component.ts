@@ -13,7 +13,7 @@ import {CommonModule} from "@angular/common";
 })
 export class ChatMessageComponent {
 
-  messageSender = input.required<"user" | "system">()
+  messageSender = input.required<"user" | "system" | "assistant">()
 
   iconName = computed(() => {
     return this.messageSender() === "user" ? "faSolidDiceD20" : "faSolidHatWizard";
