@@ -11,7 +11,7 @@
   </section>
 
   <section id="chat"
-           class="h-full w-full border-2 border-solid border-slate-700 bg-slate-400 bg-opacity-30 min-h-[26.5rem]
+           class="h-full w-full border-4 border-solid border-slate-700 bg-slate-400 bg-opacity-30 min-h-[26.5rem]
            rounded-2xl flex flex-col relative">
     <div class="flex flex-col w-full h-4/5 px-4 pt-3 pb-1 overflow-y-auto max-h-[21.5rem]">
       <app-chat-message messageSender="system"
@@ -32,7 +32,7 @@
       <textarea class="w-full rounded-bl-2xl rounded-r-none"
                 placeholder="Ask something about your lore to the lorekeeper" [(ngModel)]="message"
                 [ngModelOptions]="{standalone: true}"></textarea>
-      <button type="submit" class="btn primary w-1/6 rounded-br-2xl rounded-l-none">Send</button>
+      <button type="submit" class="btn primary w-1/6 rounded-br-2xl submit-button">Send</button>
     </form>
   </section>
 </div>
