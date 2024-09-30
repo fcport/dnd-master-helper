@@ -42,7 +42,7 @@ export class ConversationService {
 
     const t1 = performance.now()
 
-    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine().chat.completions.create(
+    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
       messages
     );
 
