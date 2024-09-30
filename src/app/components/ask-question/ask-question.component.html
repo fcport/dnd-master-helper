@@ -28,10 +28,11 @@
 
     </div>
 
-    <div class="absolute bottom-0 w-full flex flex-row" (ngSubmit)="submitMessage()">
+    <form class="absolute bottom-0 w-full flex flex-row" (ngSubmit)="submitMessage()">
       <textarea class="w-full rounded-bl-2xl rounded-r-none"
-                placeholder="Ask something about your lore to the lorekeeper" [(ngModel)]="message"></textarea>
+                placeholder="Ask something about your lore to the lorekeeper" [(ngModel)]="message"
+                [ngModelOptions]="{standalone: true}"></textarea>
       <button type="submit" class="btn primary w-1/6 rounded-br-2xl rounded-l-none">Send</button>
-    </div>
+    </form>
   </section>
 </div>
