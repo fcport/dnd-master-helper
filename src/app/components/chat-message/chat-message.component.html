@@ -1,0 +1,15 @@
+<div class="flex my-1 gap-1"
+     [class.flex-row]=" messageSender() === 'system' "
+     [class.flex-row-reverse]=" messageSender() === 'user' "
+>
+  <section class="flex flex-col gap-2">
+    <div class="rounded-full h-10 w-10 flex flex-col items-center nice-borders ">
+      <ng-icon [name]="iconName()" class="m-auto"></ng-icon>
+    </div>
+    <div class="text-xs">{{ messageSender() === 'user' ? 'Master' : 'Lore Keeper' }}</div>
+  </section>
+
+  <div class="rounded-lg w-full min-h-10 border-solid border-2 border-slate-800 bg-opacity-30 bg-slate-500 p-2">
+    {{ message() }}
+  </div>
+</div>
