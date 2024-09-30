@@ -14,7 +14,7 @@ import {ConversationService} from "../../services/conversation.service";
   styleUrl: './ask-question.component.scss'
 })
 export class AskQuestionComponent {
-  message = model('test');
+  message = model('');
   conversationService = inject(ConversationService);
   conversation = this.conversationService.messages;
   conversationDisplay = computed(() => {
