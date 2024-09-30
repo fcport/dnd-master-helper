@@ -14,7 +14,7 @@ import {ConversationService} from "../../services/conversation.service";
   styleUrl: './ask-question.component.scss'
 })
 export class AskQuestionComponent {
-  message = model('');
+  message = model('test');
   conversationService = inject(ConversationService);
   conversation = this.conversationService.messages;
   conversationDisplay = computed(() => {
@@ -25,6 +25,9 @@ export class AskQuestionComponent {
   async submitMessage() {
     console.log('submitting message');
     await this.conversationService.sendMessage(this.message());
+
     this.message.set('');
+    console.log('finished2', this.message(), this.conversation(), this.conversationDisplay());
+
   }
 }
