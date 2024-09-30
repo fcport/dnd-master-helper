@@ -24,9 +24,11 @@ export class AskQuestionComponent {
 
   async submitMessage() {
     console.log('submitting message');
-    await this.conversationService.sendMessage(this.message());
-
+    const message = this.message();
     this.message.set('');
+
+    await this.conversationService.sendMessage(message);
+
     console.log('finished2', this.message(), this.conversation(), this.conversationDisplay());
 
   }

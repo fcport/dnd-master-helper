@@ -1,5 +1,5 @@
 <div class="flex my-1 gap-1"
-     [class.flex-row]=" messageSender() === 'system' "
+     [class.flex-row]=" messageSender() === 'system' ||  messageSender() === 'assistant' "
      [class.flex-row-reverse]=" messageSender() === 'user' "
 >
   <section class="flex flex-col gap-2">

@@ -11,7 +11,7 @@ export class ConversationService {
 
   documentService = inject(DocumentsService);
 
-  messages = signal<{ role: 'user' | 'system', content: string }[]>([{
+  messages = signal<{ role: 'user' | 'system' | 'assistant', content: string }[]>([{
     role: 'system',
     content: `You are a wise and helpful Lore Keeper,
      tasked with guiding the Master of Adventures through the intricate lore of their world.
@@ -53,7 +53,7 @@ export class ConversationService {
 
     if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
       this.messages.update((prev) => [...prev, {
-        role: 'system',
+        role: 'assistant',
         content: reply.choices[0].message.content!
       }])
     }
