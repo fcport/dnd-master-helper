@@ -22,7 +22,7 @@ export class AskQuestionComponent implements OnInit {
     //removes the first message
     return this.conversation().slice(1);
   })
-  documentsSerivce = inject(DocumentsService);
+  documentsService = inject(DocumentsService);
 
   loadingAnswer = this.conversationService.loadingAnswer;
 
@@ -38,6 +38,6 @@ export class AskQuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.documentsSerivce.fetchDocuments()
+    this.documentsService.fetchDocuments()
   }
 }

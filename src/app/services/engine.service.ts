@@ -101,14 +101,7 @@ export class EngineService {
   async generateSummary(originalDocumentTitle: string = '') {
     if (!this.engine()) return;
 
-
-    const textSplitter = new TokenTextSplitter({
-      chunkSize: 3000,
-      chunkOverlap: 400,
-    });
-
-    const texts = await textSplitter.splitText(this.pdfContent());
-
+    const texts = await this.splitText(this.pdfContent());
 
     this.dispatch(setTotalLoadingDocuments(texts.length));
 
@@ -177,5 +170,16 @@ export class EngineService {
 
     this.dispatch(resetTotalLoadingDocuments());
     this.dispatch(resetLoadingDocumentNumber());
+  }
+
+  async splitText(text: string) {
+    const textSplitter = new TokenTextSplitter({
+      chunkSize: 3000,
+      chunkOverlap: 400,
+    });
+
+    const texts = await textSplitter.splitText(text);
+
+    return texts
   }
 }

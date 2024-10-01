@@ -21,7 +21,9 @@ export class ConversationService {
       and never break character.`
   }])
 
-  engine = inject(EngineService).engine;
+  engineService = inject(EngineService);
+
+  engine = this.engineService.engine;
 
   loadingAnswer = signal(false);
 
@@ -44,8 +46,11 @@ export class ConversationService {
     }]);
 
 
+    console.log(this.documents())
+
+
     const result = await this.findRelevantDocuments(message)
-    debugger
+
     console.log(result, this.documents())
 
 
@@ -82,39 +87,51 @@ export class ConversationService {
   async findRelevantDocuments(message: string) {
     if (!this.engine()) return
 
-    const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ' +
-            'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
-            ' Here are the documents: ' + JSON.stringify(this.documents())
-        },
-        {
-          role: 'user',
-          content: message
-        }
-      ],
-      stream: false,
+    const texts = this.engineService.splitText(JSON.stringify(
+      this.documents()
+        .map((doc) => doc.summary)
+        .join(', ')))
+
+    let response = "";
+
+
+    for (let text in texts) {
+      const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ' +
+              'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
+              ' Here are the documents: ' + text
+          },
+          {
+            role: 'user',
+            content: message
+          }
+        ],
+        stream: false,
+      }
+
+      const t1 = performance.now()
+
+
+      const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
+        messagesToFindRelevantDocs
+      );
+
+      const t2 = performance.now()
+
+
+      console.log('AI replied in...', t2 - t1);
+
+      if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
+        response += reply.choices[0].message.content!
+        // return reply.choices[0].message.content!
+      }
+
     }
 
-    const t1 = performance.now()
-
-
-    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
-      messagesToFindRelevantDocs
-    );
-
-    const t2 = performance.now()
-
-
-    console.log('AI replied in...', t2 - t1);
-
-    if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
-      return reply.choices[0].message.content!
-    }
-
-    return "no info"
+    return response
 
 
   }
