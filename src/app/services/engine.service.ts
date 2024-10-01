@@ -172,10 +172,10 @@ export class EngineService {
     this.dispatch(resetLoadingDocumentNumber());
   }
 
-  async splitText(text: string) {
+  async splitText(text: string, chunkSize: number = 3000, chunkOverlap: number = 400) {
     const textSplitter = new TokenTextSplitter({
-      chunkSize: 3000,
-      chunkOverlap: 400,
+      chunkSize: chunkSize,
+      chunkOverlap: chunkOverlap,
     });
 
     const texts = await textSplitter.splitText(text);

@@ -94,7 +94,7 @@ export class ConversationService {
             _id: doc._id
           }
         ))
-    ))
+    ), 2500)
 
     let response = "";
 
