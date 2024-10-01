@@ -26,8 +26,14 @@ export class ConversationService {
   }
 
   async sendMessage(message: string) {
-    console.log(!!this.engine())
-    if (!this.engine()) return
+    if (!this.engine()) {
+      this.messages.update((prev) => [...prev, {
+        role: 'user',
+        content: `Engine not loaded, there was probably an error`
+      }]);
+      return
+
+    }
 
     this.messages.update((prev) => [...prev, {
       role: 'user',
