@@ -47,8 +47,8 @@ export class EngineService {
 
   async initEngine() {
     this.loadingEngine.set(true);
-    // const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
-    const selectedModel = "Phi-3-mini-4k-instruct-q4f32_1-MLC";
+    const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+
     try {
       const engine = await CreateMLCEngine(
         selectedModel,
@@ -146,7 +146,7 @@ export class EngineService {
       const t2 = performance.now()
 
 
-      console.log('AI replied in...', t2 - t1, reply);
+      console.log('AI replied in...', t2 - t1);
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         console.log(JSON.parse(reply.choices[0].message.content));
