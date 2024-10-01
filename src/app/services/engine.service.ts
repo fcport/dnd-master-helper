@@ -49,7 +49,7 @@ export class EngineService {
   async initEngine() {
     this.loadingEngine.set(true);
     // const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
-    const selectedModel = "mlc-chat-stanford-crfm-music-small-800k-q0f32-MLC";
+    const selectedModel = "Phi-3-mini-4k-instruct-q4f32_1-MLC";
     try {
       const engine = await CreateMLCEngine(
         selectedModel,
