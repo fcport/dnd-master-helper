@@ -91,7 +91,8 @@ export class ConversationService {
       this.documents()
         .map((doc) => ({
             summary: doc.summary,
-            _id: doc._id
+            _id: doc._id,
+            keywords: doc.keywords
           }
         ))
     ), 2500)
@@ -105,8 +106,8 @@ export class ConversationService {
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE  ' +
-              'Use the documents summary to select what documents to return. Only return the Ids of the documents as array, ONLY RETURN THE ARRAY.' +
+            content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
+              'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ONLY RETURN THE ARRAY.' +
               'ONLY GET INFORMATION FROM THIS DOCUMENTS IF DOCUMENTS DONT HOLD THE ANSWER JUST SAY THAT, DONT DO ANYTHING ELSE. HERES THE DOCUMENTS: ' + text
           },
           {
