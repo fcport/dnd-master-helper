@@ -49,10 +49,22 @@ export class ConversationService {
     console.log(this.documents())
 
 
-    const result = await this.findRelevantDocuments(message)
+    const documentsRaw = await this.findRelevantDocuments(message)
+    const documents: string[] = JSON.parse(documentsRaw)
 
-    console.log(result, this.documents())
+    console.log(documents, this.documents())
 
+    if (documents.length === 0) {
+      this.messages.update((prev) => [...prev, {
+        role: 'assistant',
+        content: `There are no tomes that i can find that hold the information you seek`
+      }])
+      return
+    }
+
+    const answer = await this.answerQuestion(message, documents)
+
+    console.log(answer)
 
     const messages: ChatCompletionRequestBase = {
       messages: this.messages(),
@@ -84,8 +96,8 @@ export class ConversationService {
 
   }
 
-  async findRelevantDocuments(message: string) {
-    if (!this.engine()) return
+  private async findRelevantDocuments(message: string) {
+    if (!this.engine()) return ""
 
     const texts = await this.engineService.splitText(JSON.stringify(
       this.documents()
@@ -99,7 +111,6 @@ export class ConversationService {
 
     let response = "";
 
-    console.log('texts', texts)
 
     for (let text of texts) {
       const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
@@ -129,7 +140,7 @@ export class ConversationService {
 
 
       console.log('AI replied in...', t2 - t1);
-      console.log(console.log(reply))
+
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         response += reply.choices[0].message.content!
@@ -143,5 +154,61 @@ export class ConversationService {
 
   }
 
+
+  private async answerQuestion(message: string, documents: string[]) {
+    if (!this.engine()) {
+      this.messages.update((prev) => [...prev, {
+        role: 'user',
+        content: `Engine not loaded, there was probably an error`
+      }]);
+      return ""
+
+    }
+
+    const relevantDocs = JSON.stringify(this.documents().filter((doc) => {
+      return documents.includes(doc._id)
+    }).map((doc) => ({content: doc.content, title: doc.title})))
+
+    const texts = await this.engineService.splitText(relevantDocs, 2000, 200)
+    let response = ""
+
+    for (let text of texts) {
+
+      const messages: ChatCompletionRequestBase = {
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a helpful AI assistant that can answer questions about documents contents,' +
+              ' this is the doc content split in different chunks: ' + text,
+          },
+          {
+            role: 'user',
+            content: message
+          }
+        ],
+        stream: false,
+      }
+
+      const t1 = performance.now()
+
+      const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
+        messages
+      );
+
+      const t2 = performance.now()
+
+
+      console.log('AI replied in...', t2 - t1);
+
+      if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
+        return response += reply.choices[0].message.content!
+      }
+
+      return ""
+
+    }
+    return response
+
+  }
 
 }
