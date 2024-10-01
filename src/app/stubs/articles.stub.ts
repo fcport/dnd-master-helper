@@ -7,7 +7,28 @@ export const articlesStubs = {
         "title": "Il pantheon di Ondregos, storie e racconti",
         "summary": "Gli dei sono i precursori e i guardiani del mondo, ognuno é votato ad un tratto particolare della vita (o della morte) ed ognuno ha dato il suo contribuito nella creazione del mondo.",
         "_id": "fadf8343-133e-4604-95d1-f3fb11825cc9::1-fd28b04991fd568019ece88cacc60618",
-        "originalDocumentTitle": "Pantheon22.pdf"
+        "originalDocumentTitle": "Pantheon22.pdf",
+        "keywords": [
+          "dei",
+          "pantheon",
+          "ondregos",
+          "storie",
+          "Aquen",
+          "Ashtarat",
+          "Ghironda",
+          "Habadar",
+          "Hagseng",
+          "Kwan",
+          "Nayriki",
+          "Raziel",
+          "Urnaak",
+          "Vondra",
+          "Ahirmed",
+          "Alphorn",
+          "Aqen",
+          "Olum"
+
+        ]
       },
       {
         "title": "Il pantheon di Ondregos, storie e racconti",
