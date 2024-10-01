@@ -5,15 +5,13 @@ import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_comp
 import {Article} from "../models/article.model";
 import {BackendArticlesService} from "./backend-articles.service";
 import {TokenTextSplitter} from "@langchain/textsplitters";
-import {injectAppDispatch, injectAppSelector} from "../injectables";
-import {selectDocuments} from "../store/document-slice";
+import {injectAppDispatch} from "../injectables";
 import {
   resetLoadingDocumentNumber,
   resetTotalLoadingDocuments,
   setLoadingDocumentNumber,
   setTotalLoadingDocuments
 } from "../store/loading-slice";
-import * as repl from "node:repl";
 
 @Injectable({
   providedIn: 'root'
