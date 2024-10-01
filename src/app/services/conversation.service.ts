@@ -100,7 +100,7 @@ export class ConversationService {
 
     console.log('texts', texts)
 
-    for (let text in texts) {
+    for (let text of texts) {
       const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
         messages: [
           {
