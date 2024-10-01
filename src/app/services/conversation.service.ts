@@ -106,7 +106,7 @@ export class ConversationService {
           {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE  ' +
-              'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
+              'Use the documents summary to select what documents to return. Only return the Ids of the documents as array, ONLY RETURN THE ARRAY.' +
               'ONLY GET INFORMATION FROM THIS DOCUMENTS IF DOCUMENTS DONT HOLD THE ANSWER JUST SAY THAT, DONT DO ANYTHING ELSE. HERES THE DOCUMENTS: ' + text
           },
           {
