@@ -89,20 +89,25 @@ export class ConversationService {
 
     const texts = this.engineService.splitText(JSON.stringify(
       this.documents()
-        .map((doc) => doc.summary)
-        .join(', ')))
+        .map((doc) => ({
+            summary: doc.summary,
+            _id: doc._id
+          }
+        ))
+    ))
 
     let response = "";
 
+    console.log('texts', texts)
 
     for (let text in texts) {
       const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ' +
+            content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE  ' +
               'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
-              ' Here are the documents: ' + text
+              'ONLY GET INFORMATION FROM THIS DOCUMENTS: ' + text
           },
           {
             role: 'user',
@@ -123,6 +128,7 @@ export class ConversationService {
 
 
       console.log('AI replied in...', t2 - t1);
+      console.log(console.log(reply))
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         response += reply.choices[0].message.content!
