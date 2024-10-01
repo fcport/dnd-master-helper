@@ -87,7 +87,7 @@ export class ConversationService {
   async findRelevantDocuments(message: string) {
     if (!this.engine()) return
 
-    const texts = this.engineService.splitText(JSON.stringify(
+    const texts = await this.engineService.splitText(JSON.stringify(
       this.documents()
         .map((doc) => ({
             summary: doc.summary,
@@ -107,7 +107,7 @@ export class ConversationService {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE  ' +
               'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
-              'ONLY GET INFORMATION FROM THIS DOCUMENTS: ' + text
+              'ONLY GET INFORMATION FROM THIS DOCUMENTS IF DOCUMENTS DONT HOLD THE ANSWER JUST SAY THAT, DONT DO ANYTHING ELSE. HERES THE DOCUMENTS: ' + text
           },
           {
             role: 'user',
