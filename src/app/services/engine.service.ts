@@ -13,6 +13,7 @@ import {
   setLoadingDocumentNumber,
   setTotalLoadingDocuments
 } from "../store/loading-slice";
+import * as repl from "node:repl";
 
 @Injectable({
   providedIn: 'root'
@@ -147,7 +148,7 @@ export class EngineService {
       const t2 = performance.now()
 
 
-      console.log('AI replied in...', t2 - t1);
+      console.log('AI replied in...', t2 - t1, reply);
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         console.log(JSON.parse(reply.choices[0].message.content));
