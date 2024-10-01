@@ -46,7 +46,7 @@ export class ConversationService {
 
     const result = await this.findRelevantDocuments(message)
     debugger
-    console.log(result)
+    console.log(result, this.documents())
 
 
     const messages: ChatCompletionRequestBase = {
