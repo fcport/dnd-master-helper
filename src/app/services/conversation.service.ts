@@ -50,7 +50,7 @@ export class ConversationService {
 
 
     const documentsRaw = await this.findRelevantDocuments(message)
-    const documents: string[] = JSON.parse(documentsRaw)
+    const documents: { _id: string }[] = JSON.parse(documentsRaw)
 
     console.log(documents, this.documents())
 
@@ -156,7 +156,7 @@ export class ConversationService {
   }
 
 
-  private async answerQuestion(message: string, documents: string[]) {
+  private async answerQuestion(message: string, documents: { _id: string } []) {
     if (!this.engine()) {
       this.messages.update((prev) => [...prev, {
         role: 'user',
@@ -167,12 +167,14 @@ export class ConversationService {
     }
 
     const relevantDocs = JSON.stringify(this.documents().filter((doc) => {
-      return documents.includes(doc._id)
+      return documents.find((document) => document._id === doc._id)
     }).map((doc) => ({content: doc.content, title: doc.title})))
+
+    console.log('>>> Relevant Docs', relevantDocs)
 
     const texts = await this.engineService.splitText(relevantDocs, 2000, 200)
     let response = ""
-    console.log(texts)
+    console.log('>>> Texts ', texts)
 
     for (let text of texts) {
 
