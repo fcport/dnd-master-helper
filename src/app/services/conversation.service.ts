@@ -171,8 +171,11 @@ export class ConversationService {
 
     const texts = await this.engineService.splitText(relevantDocs, 2000, 200)
     let response = ""
+    console.log(texts)
 
     for (let text of texts) {
+
+      console.log(text)
 
       const messages: ChatCompletionRequestBase = {
         messages: [
