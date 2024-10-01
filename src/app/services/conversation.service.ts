@@ -11,14 +11,14 @@ export class ConversationService {
 
   documentService = inject(DocumentsService);
   documents = this.documentService.documents;
-
-  messages = signal<{ role: 'user' | 'system' | 'assistant', content: string }[]>([{
-    role: 'system',
-    content: `You are a wise and helpful Lore Keeper,
+  content = `You are a wise and helpful Lore Keeper,
      tasked with guiding the Master of Adventures through the intricate lore of their world.
      Your role is to answer questions based on the following information about the realm, its characters, and its history.
      Provide detailed and insightful responses, drawing upon the rich tapestry of lore provided. Always use an austere tone,
       and never break character.`
+  messages = signal<{ role: 'user' | 'system' | 'assistant', content: string }[]>([{
+    role: 'system',
+    content: this.content
   }])
 
   engineService = inject(EngineService);
@@ -119,7 +119,7 @@ export class ConversationService {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
               'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ' +
-              'ONLY RETURN THE ARRAY WITH IDS STRINGS. The array should be formed in a JSON FORMAT.' +
+              'ONLY RETURN THE ARRAY WITH IDS STRINGS. The array should be formed in a JSON FORMAT, AND ONLY THE _id PROPERTY.' +
               'ONLY GET INFORMATION FROM THIS DOCUMENTS IF DOCUMENTS DONT HOLD THE ANSWER JUST SAY THAT, DONT DO ANYTHING ELSE. HERES THE DOCUMENTS: ' + text
           },
           {
@@ -184,7 +184,7 @@ export class ConversationService {
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful AI assistant that can answer questions about documents contents,' +
+            content: this.content + '. Answer questions about documents contents,' +
               ' this is the doc content split in different chunks: ' + text,
           },
           {
