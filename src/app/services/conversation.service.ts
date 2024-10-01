@@ -10,6 +10,7 @@ import {ChatCompletion} from "@mlc-ai/web-llm/lib/openai_api_protocols/chat_comp
 export class ConversationService {
 
   documentService = inject(DocumentsService);
+  documents = this.documentService.documents;
 
   messages = signal<{ role: 'user' | 'system' | 'assistant', content: string }[]>([{
     role: 'system',
@@ -41,9 +42,16 @@ export class ConversationService {
       role: 'user',
       content: message
     }]);
+
+
+    const result = await this.findRelevantDocuments(message)
+    debugger
+    console.log(result)
+
+
     const messages: ChatCompletionRequestBase = {
       messages: this.messages(),
-      stream: false
+      stream: false,
     }
     console.log('Asking ai');
     this.loadingAnswer.set(true)
@@ -68,6 +76,46 @@ export class ConversationService {
     }
 
     this.loadingAnswer.set(false)
+
+  }
+
+  async findRelevantDocuments(message: string) {
+    if (!this.engine()) return
+
+    const messagesToFindRelevantDocs: ChatCompletionRequestBase = {
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ' +
+            'Use the documents summary to select what documents to return. Only return the Ids of the documents as array.' +
+            ' Here are the documents: ' + JSON.stringify(this.documents())
+        },
+        {
+          role: 'user',
+          content: message
+        }
+      ],
+      stream: false,
+    }
+
+    const t1 = performance.now()
+
+
+    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
+      messagesToFindRelevantDocs
+    );
+
+    const t2 = performance.now()
+
+
+    console.log('AI replied in...', t2 - t1);
+
+    if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
+      return reply.choices[0].message.content!
+    }
+
+    return "no info"
+
 
   }
 

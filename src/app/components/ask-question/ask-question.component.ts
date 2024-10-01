@@ -1,7 +1,8 @@
-import {Component, computed, inject, model} from '@angular/core';
+import {Component, computed, inject, model, OnInit} from '@angular/core';
 import {ChatMessageComponent} from "../chat-message/chat-message.component";
 import {FormsModule} from "@angular/forms";
 import {ConversationService} from "../../services/conversation.service";
+import {DocumentsService} from "../../services/documents.service";
 
 @Component({
   selector: 'app-ask-question',
@@ -13,7 +14,7 @@ import {ConversationService} from "../../services/conversation.service";
   templateUrl: './ask-question.component.html',
   styleUrl: './ask-question.component.scss'
 })
-export class AskQuestionComponent {
+export class AskQuestionComponent implements OnInit {
   message = model('');
   conversationService = inject(ConversationService);
   conversation = this.conversationService.messages;
@@ -21,6 +22,7 @@ export class AskQuestionComponent {
     //removes the first message
     return this.conversation().slice(1);
   })
+  documentsSerivce = inject(DocumentsService);
 
   loadingAnswer = this.conversationService.loadingAnswer;
 
@@ -33,5 +35,9 @@ export class AskQuestionComponent {
 
     console.log('finished2', this.message(), this.conversation(), this.conversationDisplay());
 
+  }
+
+  ngOnInit() {
+    this.documentsSerivce.fetchDocuments()
   }
 }
