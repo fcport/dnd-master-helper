@@ -22,6 +22,8 @@ export class ConversationService {
 
   engine = inject(EngineService).engine;
 
+  loadingAnswer = signal(false);
+
   constructor() {
   }
 
@@ -44,6 +46,7 @@ export class ConversationService {
       stream: false
     }
     console.log('Asking ai');
+    this.loadingAnswer.set(true)
 
 
     const t1 = performance.now()
@@ -63,6 +66,9 @@ export class ConversationService {
         content: reply.choices[0].message.content!
       }])
     }
+
+    this.loadingAnswer.set(false)
+
   }
 
 

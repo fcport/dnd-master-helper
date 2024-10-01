@@ -22,6 +22,8 @@ export class AskQuestionComponent {
     return this.conversation().slice(1);
   })
 
+  loadingAnswer = this.conversationService.loadingAnswer;
+
   async submitMessage() {
     console.log('submitting message');
     const message = this.message();

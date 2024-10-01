@@ -25,12 +25,16 @@
         <app-chat-message [messageSender]="message.role"
                           [message]="message.content"></app-chat-message>
       }
+      @if (loadingAnswer()) {
+        <app-chat-message messageSender="assistant"
+                          message="I'm searching answers among the forbidden tomes<span class='loading'><span>"></app-chat-message>
+      }
 
     </div>
 
     <form class="absolute bottom-0 w-full flex flex-row" (ngSubmit)="submitMessage()">
       <textarea class="w-full rounded-bl-2xl rounded-r-none"
-                placeholder="Ask something about your lore to the lorekeeper" [(ngModel)]="message"
+                placeholder="Ask something about your lore to the Lore Keeper" [(ngModel)]="message"
                 [ngModelOptions]="{standalone: true}"></textarea>
       <button type="submit" class="btn primary w-1/6 rounded-br-2xl submit-button">Send</button>
     </form>
