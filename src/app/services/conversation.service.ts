@@ -207,13 +207,13 @@ export class ConversationService {
       console.log('AI replied in...', t2 - t1);
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
-        return response += reply.choices[0].message.content!
+        response += reply.choices[0].message.content!
       }
 
-      return ""
+      response += ""
 
     }
-    return response
+    return response === "" ? "I could not find an answer to this question in the ancient tomes" : response
 
   }
 
