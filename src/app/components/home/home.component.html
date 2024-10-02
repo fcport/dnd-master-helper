@@ -24,12 +24,12 @@
     The Lore Keeper is a tool that uses a machine learning model to answer questions about your lore. But how can you
     teach him your lore? <br>
     You can load PDFs files in the "<a class="title underline" [routerLink]="['document-loader']">Load Docs</a>"
-    section, and the Lore Keeper will read them and learn from them.
-    The Lore Keeper will summarize the documents extract keywords and store the information in an internal memory.
+    section, and the Lore Keeper will split them, read them and learn from them by summarizing the documents, extracting
+    keywords and storing the information in an internal memory.
 
-    <h3 class="title text-xl my-3">Limits (only for now)</h3>
+    <h3 class="title text-xl my-3"> (Temporary) Limits</h3>
 
-    Yep unfortunately the Lore Keeper has some limits:
+    Yep unfortunately the Lore Keeper has some limits that in the future I plan to address:
     <ul class="list-disc list-inside">
       <li>It can only read PDF files</li>
       <li>Uploading the documents is a computationally expensive operation: the smaller the documents the quicker it
@@ -39,13 +39,15 @@
       <li>When you ask questions, the lore keeper will search among the saved documents, please expect some loading
         times and some freezing (you are running an AI model on your browser)
       </li>
+      <li>
+        A GPU is needed to run the model
+      </li>
     </ul>
 
   </div>
   <h2 class="title text-3xl"> Video Example </h2>
   <div>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
 
