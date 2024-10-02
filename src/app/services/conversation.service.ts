@@ -204,7 +204,7 @@ export class ConversationService {
       console.log('AI replied in...', t2 - t1);
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
-        response += reply.choices[0].message.content! === "null" ? "" : reply.choices[0].message.content!
+        response += reply.choices[0].message.content!.toLowerCase().includes("null") ? "" : reply.choices[0].message.content!
       }
 
       response += ""
