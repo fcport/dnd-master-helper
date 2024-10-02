@@ -119,9 +119,10 @@ export class ConversationService {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
               'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ' +
+              'IF DOCUMENTS DONT HOLD THE ANSWER JUST RETURN AN EMPTY ARRAY LIKE THIS \"[]\". \n' +
               'ONLY RETURN THE ARRAY WITH IDS STRINGS LIKE : \"[\"abcde-1234-abcde-1234\", \"zyzdr-1234-zyzdr-1234\" ]\". The array should be formed in a JSON FORMAT,' +
               ' AND ONLY THE _id PROPERTY.' +
-              'ONLY GET INFORMATION FROM THIS DOCUMENTS IF DOCUMENTS DONT HOLD THE ANSWER JUST RETURN AN EMPTY ARRAY LIKE THIS \"[]\", DONT DO ANYTHING ELSE. HERES THE DOCUMENTS: ' + text
+              'ONLY GET INFORMATION FROM THIS DOCUMENTS, DONT DO ANYTHING ELSE. HERE\'S THE DOCUMENTS: ' + text
           },
           {
             role: 'user',
