@@ -27,8 +27,6 @@ export class ConversationService {
 
   loadingAnswer = signal(false);
 
-  constructor() {
-  }
 
   async sendMessage(message: string) {
     if (!this.engine()) {
@@ -51,28 +49,42 @@ export class ConversationService {
 
     console.log(this.documents())
 
+    try {
+      const documentsRaw = await this.findRelevantDocuments(message)
+      const documents: string[] = JSON.parse(documentsRaw)
 
-    const documentsRaw = await this.findRelevantDocuments(message)
-    const documents: string[] = JSON.parse(documentsRaw)
+      console.log(documents, this.documents())
 
-    console.log(documents, this.documents())
+      if (documents.length === 0) {
+        this.messages.update((prev) => [...prev, {
+          role: 'assistant',
+          content: `There are no tomes that i can find that hold the information you seek`
+        }])
+        this.loadingAnswer.set(false)
+        return
+      }
 
-    if (documents.length === 0) {
+      const answer = await this.answerQuestion(message, documents)
+
+      console.log(answer)
+
       this.messages.update((prev) => [...prev, {
         role: 'assistant',
-        content: `There are no tomes that i can find that hold the information you seek`
+        content: answer
+      }]);
+    } catch (e) {
+
+      this.messages.update((prev) => [...prev, {
+        role: 'assistant',
+        content: `A message from the void! I Feel like i'm being corrupted: <div class="text-red-700">${e}</div>>`
       }])
+      this.loadingAnswer.set(false)
       return
+    } finally {
+      this.loadingAnswer.set(false)
+
     }
 
-    const answer = await this.answerQuestion(message, documents)
-
-    console.log(answer)
-
-    this.messages.update((prev) => [...prev, {
-      role: 'assistant',
-      content: answer
-    }]);
 
     this.loadingAnswer.set(false)
 
