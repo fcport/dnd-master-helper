@@ -194,6 +194,7 @@ export class ConversationService {
           }
         ],
         stream: false,
+        max_tokens: 600
       }
 
       const t1 = performance.now()
@@ -217,10 +218,10 @@ export class ConversationService {
 
 
       if (response.length > 400) {
-        console.log('>>> AI replied in TOTAL...', totElapsed);
 
         //remove all " null " occurrences
         response = response.replace(/null/g, "")
+        console.log('>>> AI replied in TOTAL...', totElapsed, response);
 
         return response
       }
