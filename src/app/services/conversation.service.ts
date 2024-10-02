@@ -119,9 +119,9 @@ export class ConversationService {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
               'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ' +
-              'IF DOCUMENTS DONT HOLD THE ANSWER JUST RETURN AN EMPTY ARRAY LIKE THIS \"[]\". \n' +
               'ONLY RETURN THE ARRAY WITH IDS STRINGS LIKE : \"[\"abcde-1234-abcde-1234\", \"zyzdr-1234-zyzdr-1234\" ]\". The array should be formed in a JSON FORMAT,' +
               ' AND ONLY THE _id PROPERTY.' +
+              'IF NO DOCUMENTS IS SELECTED JUST RETURN AN EMPTY ARRAY LIKE THIS \"[]\". \n' +
               'ONLY GET INFORMATION FROM THIS DOCUMENTS, DONT DO ANYTHING ELSE. HERE\'S THE DOCUMENTS: ' + text
           },
           {
@@ -147,7 +147,6 @@ export class ConversationService {
 
       if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
         response += reply.choices[0].message.content!
-        // return reply.choices[0].message.content!
       }
 
     }
@@ -219,10 +218,10 @@ export class ConversationService {
       totElapsed += t2 - t1;
 
 
-      if (response.length > 400) {
+      if (response.length >= 400) {
 
-        //remove all " null " occurrences
-        response = response.replace(/null/g, "")
+        //remove all " null " occurrences case insensitive
+        response = response.replace(/null/gi, "")
         console.log('>>> AI replied in TOTAL...', totElapsed, response);
 
         return response
