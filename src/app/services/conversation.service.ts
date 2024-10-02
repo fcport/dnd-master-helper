@@ -170,11 +170,12 @@ export class ConversationService {
       return documents.find((documentId) => documentId === doc._id)
     }).map((doc) => ({content: doc.content, title: doc.title})))
 
-    console.log('>>> Relevant Docs', relevantDocs)
 
     const texts = await this.engineService.splitText(relevantDocs, 500, 50)
     let response = ""
-    console.log('>>> Texts ', texts)
+
+    let totElapsed = 0
+
 
     for (let text of texts) {
 
@@ -212,11 +213,18 @@ export class ConversationService {
 
       response += ""
 
+      totElapsed += t2 - t1;
+
+
       if (response.length > 500) {
+        console.log('>>> AI replied in TOTAL...', totElapsed);
+
         return response
       }
 
     }
+    console.log('>>> AI replied in TOTAL...', totElapsed);
+
     return response === "" ? "I could not find an answer to this question in the ancient tomes" : response
 
   }
