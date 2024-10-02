@@ -96,7 +96,6 @@ export class ConversationService {
     const texts = await this.engineService.splitText(JSON.stringify(
       this.documents()
         .map((doc) => ({
-            summary: doc.summary,
             _id: doc._id,
             keywords: doc.keywords
           }
@@ -112,7 +111,7 @@ export class ConversationService {
           {
             role: 'system',
             content: 'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
-              'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ' +
+              'Use the documents keywords to select what documents to return. Only return the Ids of the documents as array, ' +
               'ONLY RETURN THE ARRAY WITH IDS STRINGS LIKE : \"[\"abcde-1234-abcde-1234\", \"zyzdr-1234-zyzdr-1234\" ]\". The array should be formed in a JSON FORMAT,' +
               ' AND ONLY THE _id PROPERTY.' +
               'IF NO DOCUMENTS IS SELECTED JUST RETURN AN EMPTY ARRAY LIKE THIS \"[]\". \n' +
