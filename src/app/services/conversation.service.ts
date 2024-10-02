@@ -212,6 +212,10 @@ export class ConversationService {
 
       response += ""
 
+      if (response.length > 500) {
+        return response
+      }
+
     }
     return response === "" ? "I could not find an answer to this question in the ancient tomes" : response
 
