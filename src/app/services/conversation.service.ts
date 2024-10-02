@@ -216,8 +216,11 @@ export class ConversationService {
       totElapsed += t2 - t1;
 
 
-      if (response.length > 500) {
+      if (response.length > 400) {
         console.log('>>> AI replied in TOTAL...', totElapsed);
+
+        //remove all " null " occurrences
+        response = response.replace(/null/g, "")
 
         return response
       }
