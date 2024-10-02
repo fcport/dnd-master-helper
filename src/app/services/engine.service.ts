@@ -47,7 +47,7 @@ export class EngineService {
 
   async initEngine() {
     this.loadingEngine.set(true);
-    const selectedModel = "Llama-3.1-8B-Instruct-q4f32_1-MLC";
+    const selectedModel = "Hermes-3-Llama-3.1-8B-q4f32_1-MLC";
 
     try {
       const engine = await CreateMLCEngine(
