@@ -40,6 +40,9 @@ export class ConversationService {
 
     }
 
+    this.loadingAnswer.set(true)
+
+
     this.messages.update((prev) => [...prev, {
       role: 'user',
       content: message
@@ -66,31 +69,10 @@ export class ConversationService {
 
     console.log(answer)
 
-    const messages: ChatCompletionRequestBase = {
-      messages: this.messages(),
-      stream: false,
-    }
-    console.log('Asking ai');
-    this.loadingAnswer.set(true)
-
-
-    const t1 = performance.now()
-
-    const reply: ChatCompletion | AsyncIterable<ChatCompletionChunk> = await this.engine()!.chat.completions.create(
-      messages
-    );
-
-    const t2 = performance.now()
-
-
-    console.log('AI replied in...', t2 - t1);
-
-    if ('choices' in reply && reply.choices.length > 0 && reply.choices[0].message.content) {
-      this.messages.update((prev) => [...prev, {
-        role: 'assistant',
-        content: reply.choices[0].message.content!
-      }])
-    }
+    this.messages.update((prev) => [...prev, {
+      role: 'assistant',
+      content: answer
+    }]);
 
     this.loadingAnswer.set(false)
 
