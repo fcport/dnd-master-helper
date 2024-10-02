@@ -184,7 +184,7 @@ export class ConversationService {
         messages: [
           {
             role: 'system',
-            content: this.content + '. Answer questions about documents contents,' +
+            content: this.content + '. Answer questions about documents contents, IF THERE IS NO RELEVANT INFORMATION IN THE DOCUMENT JUST RETURN AN EMPTY STRING' +
               ' this is the doc content split in different chunks: ' + text,
           },
           {
