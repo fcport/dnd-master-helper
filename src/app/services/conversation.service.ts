@@ -172,7 +172,7 @@ export class ConversationService {
 
     console.log('>>> Relevant Docs', relevantDocs)
 
-    const texts = await this.engineService.splitText(relevantDocs, 2000, 200)
+    const texts = await this.engineService.splitText(relevantDocs, 500, 50)
     let response = ""
     console.log('>>> Texts ', texts)
 
