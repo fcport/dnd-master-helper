@@ -1,5 +1,5 @@
 <app-navbar/>
-@if (!engineService.loadingEngine() && !engineService.error()) {
+@if (!engineService.loadingEngine() && !engineService.error() || true) {
   <router-outlet></router-outlet>
 } @else {
   <app-loading-engine/>
