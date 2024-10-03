@@ -1,86 +1,96 @@
-<div class="m-auto flex flex-row items-center justify-center ">
-  <section class="flex flex-col gap-3 mx-10 ">
-    <h1 class="text-6xl title font-bold text-gray-100 ">Lore <br> Keeper</h1>
-    <div class="title text-gray-100">The magic tome that helps masters keeping up with their lore</div>
-
-
+<div class="m-auto flex flex-row items-center justify-center">
+  <section class="flex flex-col gap-3 mx-10">
+    <h1 class="text-6xl title font-bold text-gray-100">
+      Lore <br />
+      Keeper
+    </h1>
+    <div class="title text-gray-100">
+      The magic tome that helps masters keeping up with their lore
+    </div>
   </section>
-  <img ngSrc="/assets/dragon.png" height="600" width="600" class="dragon" priority>
-
+  <img
+    ngSrc="assets/dragon.png"
+    height="600"
+    width="600"
+    class="dragon"
+    priority
+  />
 </div>
 
-<div class="p-3 flex flex-col gap-12 w-full md:w-2/3 lg:w-3/5 xl:w-3/5 m-auto mt-16">
-
+<div
+  class="p-3 flex flex-col gap-12 w-full md:w-2/3 lg:w-3/5 xl:w-3/5 m-auto mt-16"
+>
   <section class="block">
-
     <h1 class="title mb-4 text-4xl font-semibold">What is this</h1>
     <div>
-      This is a tool that helps you keep up with your lore. You can ask questions about your campaign and the lore
-      keeper
-      will try to answer them as best as possible. If the information you ask is not in the lore keeper's database, it
-      will
-      tell you clearly so. This way you can improve your lore, or just answer <span class="italic">"quickly"</span> to
-      your players.
+      This is a tool that helps you keep up with your lore. You can ask
+      questions about your campaign and the lore keeper will try to answer them
+      as best as possible. If the information you ask is not in the lore
+      keeper's database, it will tell you clearly so. This way you can improve
+      your lore, or just answer <span class="italic">"quickly"</span> to your
+      players.
     </div>
   </section>
 
   <section class="block">
-
-
-    <h2 class="title mb-4 text-3xl"> How does it work </h2>
+    <h2 class="title mb-4 text-3xl">How does it work</h2>
     <div>
-      The Lore Keeper is a tool that uses a machine learning model to answer questions about your lore. But how can you
-      teach him your lore? <br>
-      You can load PDFs files in the "<a class="title underline" [routerLink]="['document-loader']">Load Docs</a>"
-      section, and the Lore Keeper will split them, read them and learn from them by summarizing the documents,
-      extracting
-      keywords and storing the information in an internal memory.
+      The Lore Keeper is a tool that uses a machine learning model to answer
+      questions about your lore. But how can you teach him your lore? <br />
+      You can load PDFs files in the "<a
+        class="title underline"
+        [routerLink]="['document-loader']"
+        >Load Docs</a
+      >" section, and the Lore Keeper will split them, read them and learn from
+      them by summarizing the documents, extracting keywords and storing the
+      information in an internal memory.
 
-      <h3 class="title text-xl my-3"> (Temporary) Limits</h3>
+      <h3 class="title text-xl my-3">(Temporary) Limits</h3>
 
-      Yep unfortunately the Lore Keeper has some limits that I plan to address in the future :
+      Yep unfortunately the Lore Keeper has some limits that I plan to address
+      in the future :
       <ul class="list-disc list-inside">
         <li>It can only read PDF files</li>
-        <li>Uploading the documents is a computationally expensive operation: the smaller the documents the quicker it
-          will be to upload them!
+        <li>
+          Uploading the documents is a computationally expensive operation: the
+          smaller the documents the quicker it will be to upload them!
         </li>
         <li>As for now it can only load one document a time</li>
-        <li>When you ask questions, the lore keeper will search among the saved documents, please expect some loading
-          times and some freezing (you are running an AI model on your browser)
-        </li>
         <li>
-          A GPU is needed to run the model
+          When you ask questions, the lore keeper will search among the saved
+          documents, please expect some loading times and some freezing (you are
+          running an AI model on your browser)
         </li>
+        <li>A GPU is needed to run the model</li>
       </ul>
-
     </div>
   </section>
 
   <section class="block">
-
-
-    <h2 class="title mb-4 text-3xl mt-4"> Video Example </h2>
+    <h2 class="title mb-4 text-3xl mt-4">Video Example</h2>
     <div>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   </section>
   <section class="block">
-
-    <h2 class="title mb-4 text-3xl"> Works Offline! </h2>
+    <h2 class="title mb-4 text-3xl">Works Offline!</h2>
     <div>
-      The Lore Keeper works without any connection, so even in the deepest of the dungeons you can find answers to your
-      questions.
-      You will have to be online only the first time you load the page, to download the model.
+      The Lore Keeper works without any connection, so even in the deepest of
+      the dungeons you can find answers to your questions. You will have to be
+      online only the first time you load the page, to download the model.
     </div>
   </section>
 
-  <hr>
+  <hr />
   <!--  <div class="text-xs">If online an internet connection is available the app collects anonymous data to improve the-->
   <!--    performances of future releases. Data collected will the model response time.<br>-->
   <!--    Any AdBlocker will block the data collection, if you don't feel comfortable sharing those metrics don't worry :) .-->
   <!--  </div>-->
-
-
 </div>

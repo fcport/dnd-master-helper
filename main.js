@@ -1,5 +1,5 @@
-const {app, BrowserWindow} = require('electron');
-const path = require('path');
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -11,10 +11,12 @@ function createWindow() {
       worldSafeExecuteJavaScript: true,
       enableRemoteModule: false,
     },
+    darkTheme: true,
   });
   win.webContents.openDevTools();
-  win.loadFile(path.join(__dirname, 'dist', 'dnd-master-helper', 'index.html'));
-
+  win.loadFile(
+    path.join(__dirname, "dist", "dnd-master-helper", "browser", "index.html")
+  );
 }
 
 app.allowRendererProcessReuse = false;
