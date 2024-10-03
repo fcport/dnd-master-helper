@@ -1,15 +1,13 @@
-import {computed, inject, Injectable} from '@angular/core';
-import {BackendArticlesService} from "./backend-articles.service";
-import {injectAppDispatch, injectAppSelector} from "../injectables";
-import {articlesStubs} from "../stubs/articles.stub";
-import {Doc} from "../models/db-response.model";
-import {selectDocuments, setDocuments} from "../store/document-slice";
+import { computed, inject, Injectable } from '@angular/core';
+import { BackendArticlesService } from './backend-articles.service';
+import { injectAppDispatch, injectAppSelector } from '../injectables';
+import { Doc } from '../models/db-response.model';
+import { selectDocuments, setDocuments } from '../store/document-slice';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DocumentsService {
-
   backendArticlesService = inject(BackendArticlesService);
   dispatch = injectAppDispatch();
 
@@ -23,26 +21,24 @@ export class DocumentsService {
       if (a.title! > b.title!) {
         return 1;
       }
-      return 1
-    })
-  })
+      return 1;
+    });
+  });
 
   async fetchDocuments() {
-    const articles = await this.backendArticlesService.getAllArticles()
+    const articles = await this.backendArticlesService.getAllArticles();
 
     if (articles.rows!.length === 0) {
-
-      this.dispatch(setDocuments([]))
-      return
-
+      this.dispatch(setDocuments([]));
+      return;
     }
 
-    this.dispatch(setDocuments(articles.rows!.map((row) => row.doc)))
+    this.dispatch(setDocuments(articles.rows!.map((row) => row.doc)));
   }
 
   async deleteDocument(_id: string, _rev: string) {
     await this.backendArticlesService.deleteArticle(_id, _rev);
-    this.dispatch({type: 'deleteDocument', payload: _id})
+    this.dispatch({ type: 'deleteDocument', payload: _id });
   }
 
   async addDocument(doc: Partial<Doc>) {
