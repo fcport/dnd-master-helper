@@ -1,6 +1,7 @@
 {
   "name": "dnd-master-helper",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -10,8 +10,10 @@ function createWindow() {
       contextIsolation: false
     }
   });
-
+  win.webContents.openDevTools();
   win.loadFile(path.join(__dirname, 'dist', 'dnd-master-helper', 'index.html'));
+
 }
 
+app.allowRendererProcessReuse = false;
 app.whenReady().then(createWindow);
