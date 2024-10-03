@@ -32,8 +32,7 @@ export class DocumentsService {
 
     if (articles.rows!.length === 0) {
 
-      const articlesMapped = articlesStubs.articlesStubs["by-sequence"] as unknown as Doc[]
-      this.dispatch(setDocuments(articlesMapped))
+      this.dispatch(setDocuments([]))
       return
 
     }
