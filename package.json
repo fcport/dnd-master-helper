@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",
-    "build:executable": "npx electron-packager . dnd-master-helper --platform=win32 --arch=x64 --out=dist"
+    "build:executable": "npx electron-packager . dnd-master-helper --platform=win32 --arch=x64 --out=build/bundled"
   },
   "private": true,
   "dependencies": {
