@@ -6,9 +6,11 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
+      nodeIntegration: false,
+      contextIsolation: true,
+      worldSafeExecuteJavaScript: true,
+      enableRemoteModule: false,
+    },
   });
   win.webContents.openDevTools();
   win.loadFile(path.join(__dirname, 'dist', 'dnd-master-helper', 'index.html'));
