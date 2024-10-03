@@ -14,6 +14,7 @@ function createWindow() {
     darkTheme: true,
   });
   win.webContents.openDevTools();
+
   win.loadFile(
     path.join(__dirname, "dist", "dnd-master-helper", "browser", "index.html")
   );
