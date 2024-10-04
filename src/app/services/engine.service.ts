@@ -116,40 +116,44 @@ export class EngineService {
       const index = texts.indexOf(text);
       this.dispatch(setLoadingDocumentNumber(index + 1));
 
+      const content = `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text},
+            this is the original title of the document: ${originalDocumentTitle}.
+            ${
+        index !== 0
+          ? ` This is the part ${index + 1} of a split document of ${
+            texts.length
+          },
+             here's the previous part's summary ` +
+          this.previousSummary() +
+          '. The title has to be: ' +
+          this.previousTitle() +
+          '-p' +
+          String(index + 1).padStart(2, '0')
+          : ''
+      }. Return a json like this:
+          {
+            "title": string, //the title of the content. ${
+        index !== 0
+          ? ' The title MUST be: ' +
+          this.previousTitle() +
+          '-p' +
+          String(index + 1).padStart(2, '0')
+          : 'The title should recall the original document name if it is ' +
+          'significant otherwise you can use a generic title based on the content'
+      },
+            "summary": string //the summary of the content minimum 400 characters,
+            "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.
+            }
+          Your answer should ONLY contain the json, nothing else.
+          `
+
+      console.log('REQUESTING SUMMARY FOR:', text);
+
       const messages: ChatCompletionRequestBase = {
         messages: [
           {
             role: 'assistant',
-            content: `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text},
-            this os the original title of the document: ${originalDocumentTitle}.
-            ${
-              index !== 0
-                ? ` This is the part ${index + 1} of a split document of ${
-                  texts.length
-                },
-             here's the previous part's summary ` +
-                this.previousSummary() +
-                '. The title has to be: ' +
-                this.previousTitle() +
-                '-p' +
-                String(index + 1).padStart(2, '0')
-                : ''
-            }. Return a json like this:
-          {
-            "title": string, //the title of the content. ${
-              index !== 0
-                ? ' The title MUST be: ' +
-                this.previousTitle() +
-                '-p' +
-                String(index + 1).padStart(2, '0')
-                : 'The title should recall the original document name if it is ' +
-                'significant otherwise you can use a generic title based on the content'
-            },
-            "summary": string //the summary of the content,
-            "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.
-            }
-          Your answer should ONLY contain the json, nothing else.
-          `,
+            content: content
           },
           {
             role: 'user',
