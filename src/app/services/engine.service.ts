@@ -123,9 +123,9 @@ export class EngineService {
           ? ` This is the part ${index + 1} of a split document of ${
             texts.length
           },
-             here's the previous part's summary ` +
-          this.previousSummary() +
-          '. The title has to be: ' +
+             here's the previous part's summary :` +
+          this.previousSummary() + '. Yyou must continue the summary from here' +
+          '.\n The title has to be: ' +
           this.previousTitle() +
           '-p' +
           String(index + 1).padStart(2, '0')
