@@ -29,7 +29,7 @@
                           [message]="message.content"></app-chat-message>
       }
       @if (loadingAnswer()) {
-        @defer (on timer(500ms)) {
+        @defer (on timer(700ms)) {
 
           <app-chat-message @fadeInOut messageSender="assistant"
                             message="I'm searching answers among the forbidden tomes<span class='loading'><span>"></app-chat-message>
