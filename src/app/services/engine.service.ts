@@ -141,13 +141,13 @@ export class EngineService {
           : 'The title should recall the original document name if it is ' +
           'significant otherwise you can use a generic title based on the content'
       },
-            "summary": string //the summary of the content minimum 400 characters,
+            "summary": string //the summary of the content MUST BE minimum 400 characters,
             "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.
             }
           Your answer should ONLY contain the json, nothing else.
           `
 
-      console.log('REQUESTING SUMMARY FOR:', text);
+      console.log('REQUESTING SUMMARY FOR:', content);
 
       const messages: ChatCompletionRequestBase = {
         messages: [
