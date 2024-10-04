@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
 import {
   ChatCompletionChunk,
@@ -6,11 +6,11 @@ import {
   CreateMLCEngine,
   MLCEngine,
 } from '@mlc-ai/web-llm';
-import {ChatCompletion} from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
-import {Article} from '../models/article.model';
-import {BackendArticlesService} from './backend-articles.service';
-import {TokenTextSplitter} from '@langchain/textsplitters';
-import {injectAppDispatch} from '../injectables';
+import { ChatCompletion } from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
+import { Article } from '../models/article.model';
+import { BackendArticlesService } from './backend-articles.service';
+import { TokenTextSplitter } from '@langchain/textsplitters';
+import { injectAppDispatch } from '../injectables';
 import {
   resetLoadingDocumentNumber,
   resetTotalLoadingDocuments,
@@ -42,7 +42,6 @@ export class EngineService {
   dispatch = injectAppDispatch();
 
   constructor() {
-
     let workerSrc: string;
 
     if (this.isElectron()) {
@@ -116,36 +115,35 @@ export class EngineService {
       const index = texts.indexOf(text);
       this.dispatch(setLoadingDocumentNumber(index + 1));
 
-      const content = `You are a helpful AI assistant that can answer questions about docs, this is the doc content: ${text},
+      const content = `You are a helpful AI assistant that oragnize summarize with minimum 400 characters documents, this is the doc content: ${text},
             this is the original title of the document: ${originalDocumentTitle}.
             ${
-        index !== 0
-          ? ` This is the part ${index + 1} of a split document of ${
-            texts.length
-          },
-             here's the previous part's summary ` +
-          this.previousSummary() +
-          '. The title has to be: ' +
-          this.previousTitle() +
-          '-p' +
-          String(index + 1).padStart(2, '0')
-          : ''
-      }. Return a json like this:
-          {
+              index !== 0
+                ? ` This is the part ${index + 1} of a split document of ${
+                    texts.length
+                  },
+             ` +
+                  '. The title has to be: ' +
+                  this.previousTitle() +
+                  '-p' +
+                  String(index + 1).padStart(2, '0')
+                : ''
+            }. Return a json like this:\n
+          {\n
             "title": string, //the title of the content. ${
-        index !== 0
-          ? ' The title MUST be: ' +
-          this.previousTitle() +
-          '-p' +
-          String(index + 1).padStart(2, '0')
-          : 'The title should recall the original document name if it is ' +
-          'significant otherwise you can use a generic title based on the content'
-      },
-            "summary": string //the summary of the content MUST BE minimum 400 characters,
-            "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.
-            }
+              index !== 0
+                ? ' The title MUST be: ' +
+                  this.previousTitle() +
+                  '-p' +
+                  String(index + 1).padStart(2, '0')
+                : 'The title should recall the original document name if it is ' +
+                  'significant otherwise you can use a generic title based on the content'
+            },\n
+            "summary": string //the summary of the content MUST BE MINIMUM 400 characters NO LESS,\n
+            "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.\n
+            }\n
           Your answer should ONLY contain the json, nothing else.
-          `
+          `;
 
       console.log('REQUESTING SUMMARY FOR:', content);
 
@@ -153,7 +151,7 @@ export class EngineService {
         messages: [
           {
             role: 'assistant',
-            content: content
+            content: content,
           },
           {
             role: 'user',
