@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@jsverse/transloco": "^7.5.0",
     "@langchain/community": "^0.3.3",
     "@langchain/core": "^0.3.3",
     "@mlc-ai/web-llm": "^0.2.66",

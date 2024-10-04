@@ -1,0 +1,21 @@
+{
+  "home": {
+    "title": "The magic tome that helps masters keeping up with their lore",
+    "whatIsThis": "What is this?",
+    "whatIsThisText": " This is a tool that helps you keep up with your lore. You can ask  questions about your campaign and the lore keeper will try to answer them  as best as possible. If the information you ask is not in the lore  keeper's database, it will tell you clearly so. This way you can improve  your lore, or just answer <span class=\"italic\">\"quickly\"</span> to your  players.",
+    "howDoesItWork": "How does it work",
+    "howDoesItWorkText": " The Lore Keeper is a tool that uses a machine learning model to answer questions about your lore. But how can you teach him your lore? <br/> You can load PDFs files in the \"<a class=\"title underline\" [routerLink]=\"['document-loader']\"  >Load Docs</a  >\" section, and the Lore Keeper will split them, read them and learn from them by summarizing the documents, extracting keywords and storing the information in an internal memory.",
+    "temporaryLimits": "(Temporary) Limits",
+    "temporaryLimitsText": "Yep unfortunately the Lore Keeper has some limits that I plan to address  in the future :",
+    "temporaryLimitsList": {
+      "pdf": "The Lore Keeper can only read PDF files",
+      "uploading": "  Uploading the documents is a computationally expensive operation: the smaller the documents the quicker it will be to upload them!  ",
+      "oneDoc": "As for now it can only load one document a time",
+      "timeForResponse": "When you ask questions, the lore keeper will search among the saved documents, please expect some loading times and some freezing (you are running an AI model on your browser)",
+      "gpuNeeded": "A GPU is needed to run the model"
+    },
+    "videoExample": "Video Example",
+    "worksOffline": "Works Offline!",
+    "worksOfflineText": "The Lore Keeper works without any connection, so even in the deepest of the dungeons you can find answers to your questions. You will have to be online only the first time you load the page, to download the model.  "
+  }
+}
