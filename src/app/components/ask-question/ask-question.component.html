@@ -25,12 +25,15 @@
                            ancient realms, or fateful events, do not hesitate to summon my wisdom."></app-chat-message>
 
       @for (message of conversationDisplay(); track $index) {
-        <app-chat-message [messageSender]="message.role"
+        <app-chat-message @fadeInOut [messageSender]="message.role"
                           [message]="message.content"></app-chat-message>
       }
       @if (loadingAnswer()) {
-        <app-chat-message messageSender="assistant"
-                          message="I'm searching answers among the forbidden tomes<span class='loading'><span>"></app-chat-message>
+        @defer (on timer(500ms)) {
+
+          <app-chat-message @fadeInOut messageSender="assistant"
+                            message="I'm searching answers among the forbidden tomes<span class='loading'><span>"></app-chat-message>
+        }
       }
 
     </div>

@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import * as pdfjsLib from 'pdfjs-dist';
 import {
   ChatCompletionChunk,
@@ -6,11 +6,11 @@ import {
   CreateMLCEngine,
   MLCEngine,
 } from '@mlc-ai/web-llm';
-import { ChatCompletion } from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
-import { Article } from '../models/article.model';
-import { BackendArticlesService } from './backend-articles.service';
-import { TokenTextSplitter } from '@langchain/textsplitters';
-import { injectAppDispatch } from '../injectables';
+import {ChatCompletion} from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
+import {Article} from '../models/article.model';
+import {BackendArticlesService} from './backend-articles.service';
+import {TokenTextSplitter} from '@langchain/textsplitters';
+import {injectAppDispatch} from '../injectables';
 import {
   resetLoadingDocumentNumber,
   resetTotalLoadingDocuments,
@@ -42,20 +42,15 @@ export class EngineService {
   dispatch = injectAppDispatch();
 
   constructor() {
-    // const electron = window.require('electron');
-    // const path = electron.remote.require('path');
-    // const app = electron.remote.app;
-    // pdfjsLib.GlobalWorkerOptions.workerSrc = `${__dirname}/pdf.worker.min.mjs`;
+
     let workerSrc: string;
 
     if (this.isElectron()) {
-      // Ambiente Electron
       const electron = (window as any).require('electron');
       const path = electron.remote.require('path');
       const app = electron.remote.app;
       workerSrc = path.join(app.getAppPath(), 'assets', 'pdf.worker.min.mjs');
     } else {
-      // Ambiente browser web
       workerSrc = 'assets/pdf.worker.min.mjs';
     }
 
@@ -130,25 +125,25 @@ export class EngineService {
             ${
               index !== 0
                 ? ` This is the part ${index + 1} of a split document of ${
-                    texts.length
-                  },
+                  texts.length
+                },
              here's the previous part's summary ` +
-                  this.previousSummary() +
-                  '. The title has to be: ' +
-                  this.previousTitle() +
-                  '-p' +
-                  String(index + 1).padStart(2, '0')
+                this.previousSummary() +
+                '. The title has to be: ' +
+                this.previousTitle() +
+                '-p' +
+                String(index + 1).padStart(2, '0')
                 : ''
             }. Return a json like this:
           {
             "title": string, //the title of the content. ${
               index !== 0
                 ? ' The title MUST be: ' +
-                  this.previousTitle() +
-                  '-p' +
-                  String(index + 1).padStart(2, '0')
+                this.previousTitle() +
+                '-p' +
+                String(index + 1).padStart(2, '0')
                 : 'The title should recall the original document name if it is ' +
-                  'significant otherwise you can use a generic title based on the content'
+                'significant otherwise you can use a generic title based on the content'
             },
             "summary": string //the summary of the content,
             "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.
