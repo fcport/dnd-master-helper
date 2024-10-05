@@ -3,7 +3,7 @@ import {EngineService} from "../../services/engine.service";
 import {CommonModule} from "@angular/common";
 import {Doc} from "../../models/db-response.model";
 import {NgIconComponent, provideIcons} from "@ng-icons/core";
-import {jamSkull} from "@ng-icons/jam-icons"
+import {jamFeather, jamSkull} from "@ng-icons/jam-icons"
 import {DocumentsService} from "../../services/documents.service";
 import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments} from "../../store/loading-slice";
 import {injectAppSelector} from "../../injectables";
@@ -17,7 +17,8 @@ import {DocumentsTableComponent} from "../documents-table/documents-table.compon
   templateUrl: './document-loader.component.html',
   styleUrl: './document-loader.component.scss',
   providers: [provideIcons({
-    jamSkull
+    jamSkull,
+    jamFeather
   })]
 })
 export class DocumentLoaderComponent implements OnInit {
