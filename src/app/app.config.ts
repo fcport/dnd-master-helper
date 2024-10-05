@@ -1,22 +1,27 @@
-import {ApplicationConfig, isDevMode, provideZoneChangeDetection} from '@angular/core';
-import {provideRouter} from '@angular/router';
+import {
+  ApplicationConfig,
+  isDevMode,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import {routes} from './app.routes';
-import {provideRedux} from "@reduxjs/angular-redux";
-import {store} from "./store";
-import {provideAnimations} from "@angular/platform-browser/animations";
+import { routes } from './app.routes';
+import { provideRedux } from '@reduxjs/angular-redux';
+import { store } from './store';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
-import {provideTransloco} from '@jsverse/transloco';
+import { provideTransloco } from '@jsverse/transloco';
 
-import {TranslocoHttpLoader} from './TranslocoHttpLoader';
-import {provideHttpClient} from "@angular/common/http";
+import { TranslocoHttpLoader } from './TranslocoHttpLoader';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({eventCoalescing: true}),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
+
     provideRouter(routes),
-    provideRedux({store}),
+    provideRedux({ store }),
     provideHttpClient(),
     provideTransloco({
       config: {
@@ -27,6 +32,6 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
-    })],
-
+    }),
+  ],
 };
