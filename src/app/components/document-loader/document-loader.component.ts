@@ -55,7 +55,9 @@ export class DocumentLoaderComponent implements OnInit {
 
   }
 
-  deleteDocument(_id: string, _rev: string) {
+  deleteDocument(params: { _id: string, _rev: string }) {
+
+    const {_id, _rev} = params;
     if (confirm("Are you sure you want to delete this document? (Cancel to abort)")) {
       this.documentsService.deleteDocument(_id, _rev).then(() => {
         this.loadDocuments();
