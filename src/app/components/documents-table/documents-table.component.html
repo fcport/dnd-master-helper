@@ -1,0 +1,22 @@
+<table class="table-auto">
+  <thead>
+  <tr>
+    <th class="text-left text-lg">Title</th>
+    <th class="text-left text-lg">Original Title</th>
+    <th class="text-lg">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (article of articles(); track $index) {
+      <tr
+        class="items-center border-gray-600 border-b-[1px] border-solid bg-transparent hover:bg-black_bean-500 transition-all">
+        <td class="p-3">{{ article.title }}</td>
+        <td class="p-3">{{ article.originalDocumentTitle }}</td>
+        <td class="text-center flex align-baseline text-xl text-red-500 cursor-pointer items-center p-3">
+          <ng-icon name="jamSkull" class="transition-all hover:text-2xl hover:text-red-300"
+                   (click)="deleteDocument({_id: article._id, _rev: article._rev})"></ng-icon>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
