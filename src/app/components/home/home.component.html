@@ -2,11 +2,11 @@
   <div class="m-auto flex flex-row items-center justify-center">
     <section class="flex flex-col gap-3 mx-10">
       <h1 class="text-6xl title font-bold text-gray-100">
-        Lore <br/>
+        Lore <br />
         Keeper
       </h1>
       <div class="title text-gray-100">
-        {{ t('title') }}
+        {{ t("title") }}
       </div>
     </section>
     <img
@@ -23,10 +23,10 @@
   >
     <section class="block">
       <h1 class="title mb-4 text-4xl font-semibold">What is this</h1>
-      <div innerHTML="{{t('whatIsThisText')}}">
+      <div innerHTML="{{ t('whatIsThisText') }}">
         This is a tool that helps you keep up with your lore. You can ask
-        questions about your campaign and the lore keeper will try to answer them
-        as best as possible. If the information you ask is not in the lore
+        questions about your campaign and the lore keeper will try to answer
+        them as best as possible. If the information you ask is not in the lore
         keeper's database, it will tell you clearly so. This way you can improve
         your lore, or just answer <span class="italic">"quickly"</span> to your
         players.
@@ -34,58 +34,73 @@
     </section>
 
     <section class="block">
-      <h2 class="title mb-4 text-3xl">{{ t('howDoesItWork') }}</h2>
+      <h2 class="title mb-4 text-3xl">{{ t("howDoesItWork") }}</h2>
       <div>
-        <span innerHTML="{{t('howDoesItWorkText')}}">
-        </span>
+        <span innerHTML="{{ t('howDoesItWorkText') }}"> </span>
 
+        <h3 class="title text-xl my-3">{{ t("temporaryLimits") }}</h3>
 
-        <h3 class="title text-xl my-3">{{ t('temporaryLimits') }}</h3>
-
-        {{
-          t('temporaryLimitsText')
-        }}
+        {{ t("temporaryLimitsText") }}
         <ul class="list-disc list-inside">
-          <li>{{ t('temporaryLimitsList.pdf') }}</li>
+          <li>{{ t("temporaryLimitsList.pdf") }}</li>
           <li>
-            {{ t('temporaryLimitsList.uploading') }}
+            {{ t("temporaryLimitsList.uploading") }}
           </li>
-          <li>{{ t('temporaryLimitsList.oneDoc') }}</li>
+          <li>{{ t("temporaryLimitsList.oneDoc") }}</li>
           <li>
-            {{ t('temporaryLimitsList.timeForResponse') }}
+            {{ t("temporaryLimitsList.timeForResponse") }}
           </li>
           <li>
-            {{ t('temporaryLimitsList.gpuNeeded') }}
+            {{ t("temporaryLimitsList.gpuNeeded") }}
           </li>
         </ul>
       </div>
     </section>
 
     <section class="block">
-      <h2 class="title mb-4 text-3xl mt-4">{{ t('videoExample') }}</h2>
+      <h2 class="title mb-4 text-3xl mt-4">{{ t("videoExample") }}</h2>
       <div>
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/rAWDvz7SiCs"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        @defer(on viewport){
+
+        <video width="640" height="480" controls>
+          <source src="assets/lore-keeper.mp4" type="video/mp4" />
+
+          Your browser does not support the video tag, follow this link:
+          <a
+            class="underline"
+            href="https://www.youtube.com/rAWDvz7SiCs"
+            target="_blank"
+          >
+            <a href="https://www.youtube.com/rAWDvz7SiCs" target="_blank"></a>
+            https://www.youtube.com/rAWDvz7SiCs</a
+          >
+        </video>
+        } @placeholder {
+        <img src="assets/lore-keeper.png" alt="Lore Keeper" class="w-full" />
+        }
+
+        <span class="block mt-2">
+          or watch it on
+          <a
+            class="underline"
+            href="https://www.youtube.com/rAWDvz7SiCs"
+            target="_blank"
+            >Youtube</a
+          >
+        </span>
       </div>
     </section>
     <section class="block">
-      <h2 class="title mb-4 text-3xl">{{ t('worksOffline') }}</h2>
+      <h2 class="title mb-4 text-3xl">{{ t("worksOffline") }}</h2>
       <div>
-        {{ t('worksOfflineText') }}
+        {{ t("worksOfflineText") }}
       </div>
     </section>
 
-    <hr/>
+    <hr />
     <!--  <div class="text-xs">If online an internet connection is available the app collects anonymous data to improve the-->
     <!--    performances of future releases. Data collected will the model response time.<br>-->
     <!--    Any AdBlocker will block the data collection, if you don't feel comfortable sharing those metrics don't worry :) .-->
     <!--  </div>-->
   </div>
 </article>
-
