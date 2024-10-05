@@ -218,7 +218,7 @@ export class EngineService {
     return texts;
   }
 
-  async interruptOperation() {
-    await this.engine()?.interruptGenerate()
+  interruptOperation() {
+    window.location.reload();
   }
 }
