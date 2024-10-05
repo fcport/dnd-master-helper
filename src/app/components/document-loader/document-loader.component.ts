@@ -1,4 +1,4 @@
-import {Component, computed, inject, model, OnInit, viewChild} from '@angular/core';
+import {Component, computed, inject, model, OnInit, signal, viewChild} from '@angular/core';
 import {EngineService} from "../../services/engine.service";
 import {CommonModule} from "@angular/common";
 import {Doc} from "../../models/db-response.model";
@@ -9,13 +9,27 @@ import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments} from "../../
 import {injectAppSelector} from "../../injectables";
 import {FormsModule} from "@angular/forms";
 import {DocumentsTableComponent} from "../documents-table/documents-table.component";
+import {DocumentSidePanelComponent} from "../document-side-panel/document-side-panel.component";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-document-loader',
   standalone: true,
-  imports: [CommonModule, NgIconComponent, FormsModule, DocumentsTableComponent],
+  imports: [CommonModule, NgIconComponent, FormsModule, DocumentsTableComponent, DocumentSidePanelComponent],
   templateUrl: './document-loader.component.html',
   styleUrl: './document-loader.component.scss',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('500ms', style({transform: 'translateX(0)'})),
+      ]),
+      transition(':leave', [
+        style({transform: 'translateX(0)'}),
+        animate('500ms', style({transform: 'translateX(100%)'})),
+      ]),
+    ]),
+  ],
   providers: [provideIcons({
     jamSkull,
     jamFeather
@@ -41,6 +55,7 @@ export class DocumentLoaderComponent implements OnInit {
 
   loadingDocumentsMessage = injectAppSelector(selectLoadingDocumentsMessage)
   isLoadingDocuments = injectAppSelector(selectTotalLoadingDocuments)
+  showPanel = signal<boolean>(false);
 
   ngOnInit() {
     this.loadDocuments();
