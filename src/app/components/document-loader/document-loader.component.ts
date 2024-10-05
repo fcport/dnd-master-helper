@@ -1,4 +1,4 @@
-import {Component, computed, inject, model, OnInit} from '@angular/core';
+import {Component, computed, inject, model, OnInit, viewChild} from '@angular/core';
 import {EngineService} from "../../services/engine.service";
 import {CommonModule} from "@angular/common";
 import {Doc} from "../../models/db-response.model";
@@ -27,6 +27,7 @@ export class DocumentLoaderComponent implements OnInit {
   documentsService = inject(DocumentsService)
 
   articles = this.documentsService.documentsSortedAlphabetically;
+  uploadFileInput = viewChild<HTMLInputElement>("uploadFileInput")
 
   articlesFiltered = computed(() => {
     return this.articles().filter((doc: Doc) => {
@@ -47,7 +48,10 @@ export class DocumentLoaderComponent implements OnInit {
 
   async uploadDocument(event: any) {
     await this.engineService.onFileSelected(event);
-    this.loadDocuments()
+    await this.loadDocuments()
+    if (this.uploadFileInput()) {
+      this.uploadFileInput()!.value = ""
+    }
 
   }
 

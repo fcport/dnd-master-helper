@@ -12,7 +12,9 @@
      file:bg-black_bean-500 file:text-gray-100
      hover:file:cursor-pointer"
            (change)="uploadDocument($event)"
-           accept="application/pdf"/>
+           accept="application/pdf"
+           #uploadFileInput
+    />
 
     <div class="my-3">Upload new documents to expand the lore of your world, each document will be used for future
       searches.
