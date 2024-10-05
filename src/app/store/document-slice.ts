@@ -5,11 +5,14 @@ import {RootState} from "./index";
 
 
 export interface DocumentState {
-  documents: Doc[]
+  documents: Doc[],
+  activeDocument?: Doc | null
 }
 
 const initialState: DocumentState = {
-  documents: []
+  documents: [],
+  activeDocument: null
+
 }
 
 export const documentSlice = createSlice({
@@ -24,14 +27,21 @@ export const documentSlice = createSlice({
     },
     setDocuments: (state, action: PayloadAction<Doc[]>) => {
       state.documents = [...action.payload]
+    },
+    setActiveDocument: (state, action: PayloadAction<Doc>) => {
+      state.activeDocument = action.payload
+    },
+    resetActiveDocument: (state) => {
+      state.activeDocument = null
     }
   },
 })
 
 
-export const {addDocument, deleteDocument, setDocuments} = documentSlice.actions
+export const {addDocument, deleteDocument, resetActiveDocument, setActiveDocument, setDocuments} = documentSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectDocuments = (state: RootState) => state.document.documents;
+export const selectActiveDocument = (state: RootState) => state.document.activeDocument;
 
 export default documentSlice.reducer
