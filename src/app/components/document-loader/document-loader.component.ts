@@ -63,4 +63,8 @@ export class DocumentLoaderComponent implements OnInit {
       });
     }
   }
+
+  interrupt() {
+    this.engineService.interruptOperation()
+  }
 }

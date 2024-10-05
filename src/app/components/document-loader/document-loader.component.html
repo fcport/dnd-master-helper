@@ -84,6 +84,11 @@
         {{ loadingDocumentsMessage() }}
       </span>
       <span class="loading"></span>
+      <br>
+      <span class="underline cursor-pointer" (click)="interrupt()">Stop Operation </span>
+      <br>
+
+      <span class="text-xs"> This will interrupt the process, but the saved documents will be safe in the Lore Keeper's memory</span>
     </div>
   </div>
 
