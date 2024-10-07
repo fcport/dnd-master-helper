@@ -6,7 +6,7 @@ import {RootState} from "./index";
 
 export interface DocumentState {
   documents: Doc[],
-  activeDocument?: Doc | null
+  activeDocument: Doc | null
 }
 
 const initialState: DocumentState = {

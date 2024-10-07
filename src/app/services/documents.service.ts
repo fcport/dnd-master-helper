@@ -1,8 +1,8 @@
-import { computed, inject, Injectable } from '@angular/core';
-import { BackendArticlesService } from './backend-articles.service';
-import { injectAppDispatch, injectAppSelector } from '../injectables';
-import { Doc } from '../models/db-response.model';
-import { selectDocuments, setDocuments } from '../store/document-slice';
+import {computed, inject, Injectable} from '@angular/core';
+import {BackendArticlesService} from './backend-articles.service';
+import {injectAppDispatch, injectAppSelector} from '../injectables';
+import {Doc} from '../models/db-response.model';
+import {selectDocuments, setDocuments} from '../store/document-slice';
 
 @Injectable({
   providedIn: 'root',
@@ -38,11 +38,16 @@ export class DocumentsService {
 
   async deleteDocument(_id: string, _rev: string) {
     await this.backendArticlesService.deleteArticle(_id, _rev);
-    this.dispatch({ type: 'deleteDocument', payload: _id });
+    this.dispatch({type: 'deleteDocument', payload: _id});
   }
 
   async addDocument(doc: Partial<Doc>) {
     await this.backendArticlesService.addArticle(doc);
     await this.fetchDocuments();
+  }
+
+  async updateDocument(doc: Partial<Doc>) {
+    await this.backendArticlesService.updateArticle(doc);
+    await this.fetchDocuments()
   }
 }

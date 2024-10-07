@@ -1,33 +1,16 @@
-import {
-  Component,
-  computed,
-  inject,
-  model,
-  OnInit,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { EngineService } from '../../services/engine.service';
-import { CommonModule } from '@angular/common';
-import { Doc } from '../../models/db-response.model';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { jamFeather, jamSkull } from '@ng-icons/jam-icons';
-import { DocumentsService } from '../../services/documents.service';
-import {
-  selectLoadingDocumentsMessage,
-  selectTotalLoadingDocuments,
-} from '../../store/loading-slice';
-import { injectAppSelector } from '../../injectables';
-import { FormsModule } from '@angular/forms';
-import { DocumentsTableComponent } from '../documents-table/documents-table.component';
-import { DocumentSidePanelComponent } from '../document-side-panel/document-side-panel.component';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import {Component, computed, inject, model, OnInit, viewChild,} from '@angular/core';
+import {EngineService} from '../../services/engine.service';
+import {CommonModule} from '@angular/common';
+import {Doc} from '../../models/db-response.model';
+import {NgIconComponent, provideIcons} from '@ng-icons/core';
+import {jamFeather, jamSkull} from '@ng-icons/jam-icons';
+import {DocumentsService} from '../../services/documents.service';
+import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments,} from '../../store/loading-slice';
+import {injectAppSelector} from '../../injectables';
+import {FormsModule} from '@angular/forms';
+import {DocumentsTableComponent} from '../documents-table/documents-table.component';
+import {DocumentSidePanelComponent} from '../document-side-panel/document-side-panel.component';
+import {animate, style, transition, trigger,} from '@angular/animations';
 
 @Component({
   selector: 'app-document-loader',
@@ -44,12 +27,12 @@ import {
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('500ms', style({ transform: 'translateX(0)' })),
+        style({transform: 'translateX(100%)'}),
+        animate('500ms', style({transform: 'translateX(0)'})),
       ]),
       transition(':leave', [
-        style({ transform: 'translateX(0)' }),
-        animate('500ms', style({ transform: 'translateX(100%)' })),
+        style({transform: 'translateX(0)'}),
+        animate('500ms', style({transform: 'translateX(100%)'})),
       ]),
     ]),
   ],
@@ -101,7 +84,7 @@ export class DocumentLoaderComponent implements OnInit {
   }
 
   deleteDocument(params: { _id: string; _rev: string }) {
-    const { _id, _rev } = params;
+    const {_id, _rev} = params;
     if (
       confirm(
         'Are you sure you want to delete this document? (Cancel to abort)'
@@ -115,5 +98,15 @@ export class DocumentLoaderComponent implements OnInit {
 
   interrupt() {
     this.engineService.interruptOperation();
+  }
+
+
+  async saveDocument(document: Partial<Doc>) {
+    await this.documentsService.updateDocument(document);
+
+  }
+
+  onCancel() {
+    this.showPanel = false;
   }
 }

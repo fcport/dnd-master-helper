@@ -22,7 +22,7 @@ export interface Doc {
   title?: string | null;
   summary?: string | null
   originalDocumentTitle?: string | null
-  keywords?: string | null
+  keywords?: string[] | null
 }
 
 

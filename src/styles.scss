@@ -82,11 +82,16 @@ body {
 }
 
 input {
-  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800 nice-borders;
+  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800;
+}
+
+input[disabled="true"] {
+
+  @apply bg-gray-400 cursor-not-allowed;
 }
 
 textarea {
-  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800 nice-borders;
+  @apply text-gray-100 p-2 rounded-lg border-solid border-2 border-gray-800 ;
 }
 
 
