@@ -33,7 +33,8 @@ export const documentSlice = createSlice({
     },
     resetActiveDocument: (state) => {
       state.activeDocument = null
-    }
+    },
+
   },
 })
 

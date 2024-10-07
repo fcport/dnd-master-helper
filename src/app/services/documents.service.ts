@@ -50,4 +50,11 @@ export class DocumentsService {
     await this.backendArticlesService.updateArticle(doc);
     await this.fetchDocuments()
   }
+
+  setSelectedDocument(doc: Pick<Doc, '_id' | '_rev'>) {
+
+    const document = this.documents().find((document) => document._id === doc._id)
+    this.dispatch({type: 'setActiveDocument', payload: document})
+
+  }
 }
