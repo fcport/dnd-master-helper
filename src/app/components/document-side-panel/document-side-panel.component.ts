@@ -1,22 +1,14 @@
-import {
-  Component,
-  inject,
-  model,
-  output,
-  Signal,
-  signal,
-} from '@angular/core';
-import { injectAppSelector } from '../../injectables';
-import { selectActiveDocument } from '../../store/document-slice';
-import { Doc } from '../../models/db-response.model';
 import { CommonModule } from '@angular/common';
+import { Component, inject, model, output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { injectAppSelector } from '../../injectables';
+import { Doc } from '../../models/db-response.model';
+import { selectActiveDocument } from '../../store/document-slice';
 
 @Component({
   selector: 'app-document-side-panel',
