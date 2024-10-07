@@ -109,4 +109,11 @@ export class DocumentLoaderComponent implements OnInit {
   onCancel() {
     this.showPanel = false;
   }
+
+  editDocument($event: { _id: string; _rev: string }) {
+    this.showPanel = true;
+
+    this.documentsService.setSelectedDocument($event);
+
+  }
 }
