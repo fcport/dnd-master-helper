@@ -3,49 +3,76 @@
   (ngSubmit)="saveDocument()"
   class="h-lvh absolute top-0 right-0 w-1/2 z-10 backdrop-blur bg-black_bean-500 flex flex-col justify-between"
 >
-
-  <div class="flex flex-col gap-3 p-4">
+  <div class="flex flex-col gap-3 p-4 h-full">
     <h1 class="text-2xl">Edit Document</h1>
     <div class="flex flex-col">
       <label for="title">Title</label>
-      <input formControlName="title" type="text" id="title" placeholder="title" name="title"
-             class="border-slate-800 bg-slate-500"/>
+      <input
+        formControlName="title"
+        type="text"
+        id="title"
+        placeholder="title"
+        name="title"
+        class="border-slate-800 bg-slate-500"
+      />
     </div>
     <div class="flex flex-col">
       <label for="originalTitle">Original title</label>
-      <input type="text" id="originalTitle" placeholder="Original title" disabled/>
+      <input
+        type="text"
+        id="originalTitle"
+        placeholder="Original title"
+        disabled
+      />
     </div>
 
     <div class="flex flex-col">
       <label for="summary">Summary</label>
-      <textarea formControlName="summary" id="summary" class="border-slate-800 bg-slate-500"
-                placeholder="Summary"> </textarea>
+      <textarea
+        formControlName="summary"
+        id="summary"
+        class="border-slate-800 bg-slate-500"
+        placeholder="Summary"
+      >
+      </textarea>
     </div>
 
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col">
       <label for="keywords">Keywords</label>
-      <textarea formControlName="keywords" id="keywords" placeholder="Keywords comma separated"
-                class="border-slate-800 bg-slate-500"> </textarea>
+      <textarea
+        formControlName="keywords"
+        id="keywords"
+        placeholder="Keywords comma separated"
+        class="border-slate-800 bg-slate-500"
+      >
+      </textarea>
     </div>
 
     <div class="flex flex-col h-full">
       <label for="content">Content</label>
-      <textarea id="content" formControlName="content" placeholder="Content, a very long text"
-                class="border-slate-800 bg-slate-500"> </textarea>
+      <textarea
+        id="content"
+        formControlName="content"
+        placeholder="Content, a very long text"
+        class="border-slate-800 bg-slate-500 h-full"
+      >
+      </textarea>
     </div>
   </div>
 
-
   <section class="flex flex-row">
-    <button class="btn bg-green-700 w-1/2 borders-no-rounded p-4 hover:bg-green-500 transition-colors" type="submit">
+    <button
+      class="btn bg-green-700 w-1/2 borders-no-rounded p-4 hover:bg-green-500 transition-colors"
+      type="submit"
+    >
       Save
     </button>
-    <button class="btn w-1/2 borders-no-rounded bg-red-700 p-4 hover:bg-red-500 transition-colors" type="button"
-            (click)="cancel()">
+    <button
+      class="btn w-1/2 borders-no-rounded bg-red-700 p-4 hover:bg-red-500 transition-colors"
+      type="button"
+      (click)="cancel()"
+    >
       Cancel
     </button>
-
   </section>
-
-
 </form>
