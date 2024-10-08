@@ -113,7 +113,6 @@ export class DocumentLoaderComponent implements OnInit {
   async saveDocument(document: Partial<Doc>) {
     await this.documentsService.updateDocument(document);
     this.showPanel = false
-
   }
 
   onCancel() {

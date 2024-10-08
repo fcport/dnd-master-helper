@@ -39,7 +39,7 @@
     </div>
 
     <form class="w-full flex flex-row" (ngSubmit)="submitMessage()">
-      <textarea class="w-full rounded-bl-2xl rounded-r-none"
+      <textarea class="w-full rounded-bl-2xl rounded-r-none nice-borders"
                 placeholder="Ask something about your lore to the Lore Keeper" [(ngModel)]="message"
                 [ngModelOptions]="{standalone: true}"></textarea>
       <button type="submit" class="btn primary w-1/6 rounded-br-2xl submit-button">Send</button>
