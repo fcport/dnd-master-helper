@@ -5,6 +5,7 @@ import {ConversationService} from "../../services/conversation.service";
 import {DocumentsService} from "../../services/documents.service";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {CommonModule} from "@angular/common";
+import {TranslocoDirective, TranslocoModule} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-ask-question',
@@ -12,7 +13,8 @@ import {CommonModule} from "@angular/common";
   imports: [
     ChatMessageComponent,
     FormsModule,
-    CommonModule
+    CommonModule,
+    TranslocoModule
   ],
   templateUrl: './ask-question.component.html',
   styleUrl: './ask-question.component.scss',

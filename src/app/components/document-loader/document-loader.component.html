@@ -8,6 +8,7 @@
 }
 <div
   class="p-3 flex flex-col gap-4 w-full md:w-2/3 lg:w-3/5 xl:w-3/5 m-auto mt-16"
+  *transloco="let t; prefix: 'documentLoader'"
 >
   <section class="p-2">
     <label for="inputFile" class="mr-3">Upload New Docs</label>
@@ -21,28 +22,20 @@
     />
 
     <div class="my-3">
-      Upload new documents to expand the lore of your world, each document will
-      be used for future searches. Through AI it will we possible to create
-      small summaries of your documents that will be used to index the articles
-      and to know what document to search when you ask a question (at least
-      that's the idea).
+      {{ t('uploadDocuments') }}
     </div>
     <div class="my-3">
-      Each document will have an original title and a title, the original title
-      is the name of the document as it was uploaded, the title is the name that
-      the AI think it suits the document.
+      {{ t('uploadDocuments2') }}
     </div>
     <div class="my-3 font-bold">
-      Please expect some time for the documents to be processed, the more
-      documents you upload the more time it will take (it also depends on your
-      pc specs).
+      {{ t('uploadDocuments3') }}
     </div>
   </section>
 
   <hr class="w-1/2"/>
 
   <section class="m-4">
-    <h2 class="text-2xl title my-2">All documents ({{ articles().length }})</h2>
+    <h2 class="text-2xl title my-2">{{ t('allDocuments') }} ({{ articles().length }})</h2>
 
     @if (articles().length > 0) {
 
@@ -63,29 +56,29 @@
         />
       </div>
     } @else {
-      <div class="text-white text-lg underline">No documents loaded</div>
+      <div class="text-white text-lg underline">{{ t('noDocuments') }}</div>
     }
   </section>
 </div>
 
 @if (isLoadingDocuments()) {
-  <div class="z-10 w-full h-full absolute top-0 right-0 backdrop-blur-lg">
+  <div class="z-10 w-full h-full absolute top-0 right-0 backdrop-blur-lg" *transloco="let t; prefix: 'documentLoader'">
     <div
       class="w-4/5 md:w-1/2 lg:w-1/2 xl:w-1/3 m-auto min-h-3 mt-10 p-5 bg-black_bean-500 nice-borders flex flex-col gap-2"
     >
-      <span>Splitting and loading docs:</span>
+      <span>{{ t('splittingLoading') }}</span>
       <span>
       {{ loadingDocumentsMessage() }}
     </span>
       <span class="loading"></span>
       <div class="flex flex-col gap-1">
       <span class="underline cursor-pointer" (click)="interrupt()"
-      >Stop Operation
+      >{{ t('stopOperation') }}
       </span>
 
         <span class="text-xs">
-        This will interrupt the process and reload the app, but the saved
-        documents will be safe in the Lore Keeper's memory</span
+          {{ t('stopExplain') }}
+        </span
         >
       </div>
     </div>

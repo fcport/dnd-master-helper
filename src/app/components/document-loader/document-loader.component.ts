@@ -1,26 +1,17 @@
-import {
-  Component,
-  computed,
-  inject,
-  model,
-  OnInit,
-  viewChild,
-} from '@angular/core';
+import {Component, computed, inject, model, OnInit, viewChild,} from '@angular/core';
 import {EngineService} from '../../services/engine.service';
 import {CommonModule} from '@angular/common';
 import {Doc} from '../../models/db-response.model';
 import {NgIconComponent, provideIcons} from '@ng-icons/core';
 import {jamFeather, jamSkull} from '@ng-icons/jam-icons';
 import {DocumentsService} from '../../services/documents.service';
-import {
-  selectLoadingDocumentsMessage,
-  selectTotalLoadingDocuments,
-} from '../../store/loading-slice';
+import {selectLoadingDocumentsMessage, selectTotalLoadingDocuments,} from '../../store/loading-slice';
 import {injectAppSelector} from '../../injectables';
 import {FormsModule} from '@angular/forms';
 import {DocumentsTableComponent} from '../documents-table/documents-table.component';
 import {DocumentSidePanelComponent} from '../document-side-panel/document-side-panel.component';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {TranslocoModule} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-document-loader',
@@ -31,6 +22,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
     FormsModule,
     DocumentsTableComponent,
     DocumentSidePanelComponent,
+    TranslocoModule,
   ],
   templateUrl: './document-loader.component.html',
   styleUrl: './document-loader.component.scss',
