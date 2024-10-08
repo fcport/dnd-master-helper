@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const {app, BrowserWindow} = require("electron");
 const path = require("path");
 
 function createWindow() {
@@ -18,6 +18,8 @@ function createWindow() {
   win.loadFile(
     path.join(__dirname, "dist", "dnd-master-helper", "browser", "index.html")
   );
+
+  win.maximize()
 }
 
 app.allowRendererProcessReuse = false;
