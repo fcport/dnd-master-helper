@@ -33,5 +33,25 @@
     "chatWithTheLoreKeeperText": " Here you can ask questions about the lore of your campaign. The lore keeper will try to answer your questions as\n        best as possible. <br>\n        If the information you ask is not in the lore keeper's database, it will tell you clearly so. This way you can\n        improve your lore.",
     "loreKeeperWelcome": "Greetings, Esteemed Master of Adventures.\n                         I am the Lore Keeper, your faithful guide through the vast tapestry of your imagination.\n                         In this sacred space, I stand ready to assist you in unearthing the secrets woven\n                          into the very fabric of your lore. Should you seek knowledge of illustrious heroes,\n                           ancient realms, or fateful events, do not hesitate to summon my wisdom.",
     "send": "Send"
+  },
+  "aiAssistant": {
+    "instruction": "You are a helpful AI assistant that organizes and summarizes documents with a minimum of 400 characters",
+    "docContent": "this is the doc content: {{text}}",
+    "originalTitle": "this is the original title of the document: {{originalDocumentTitle}}",
+    "splitDocument": {
+      "part": "This is part {{index}} of a split document of {{totalParts}}",
+      "titleInstruction": "The title has to be: {{previousTitle}}-p{{paddedIndex}}"
+    },
+    "jsonFormat": {
+      "instruction": "Return a JSON like this:",
+      "title": {
+        "description": "string, //the title of the content.",
+        "splitInstruction": "The title MUST be: {{previousTitle}}-p{{paddedIndex}}",
+        "normalInstruction": "The title should recall the original document name if it is significant otherwise you can use a generic title based on the content"
+      },
+      "summary": "string //the summary of the content MUST BE MINIMUM 400 characters NO LESS",
+      "keywords": "string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc."
+    },
+    "finalInstruction": "Your answer should ONLY contain the JSON, nothing else."
   }
 }
