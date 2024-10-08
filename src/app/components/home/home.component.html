@@ -1,8 +1,8 @@
 <article *transloco="let t; prefix: 'home'">
-  <div class="m-auto flex flex-row items-center justify-center">
+  <div class="m-auto flex flex-row items-center justify-center md:flex-wrap md:mt-10">
     <section class="flex flex-col gap-3 mx-10">
       <h1 class="text-6xl title font-bold text-gray-100">
-        Lore <br />
+        Lore <br/>
         Keeper
       </h1>
       <div class="title text-gray-100">
@@ -60,23 +60,23 @@
     <section class="block">
       <h2 class="title mb-4 text-3xl mt-4">{{ t("videoExample") }}</h2>
       <div>
-        @defer(on viewport){
+        @defer (on viewport) {
 
-        <video width="640" height="480" controls>
-          <source src="assets/lore-keeper.mp4" type="video/mp4" />
+          <video width="640" height="480" controls>
+            <source src="assets/lore-keeper.mp4" type="video/mp4"/>
 
-          Your browser does not support the video tag, follow this link:
-          <a
-            class="underline"
-            href="https://www.youtube.com/rAWDvz7SiCs"
-            target="_blank"
-          >
-            <a href="https://www.youtube.com/rAWDvz7SiCs" target="_blank"></a>
-            https://www.youtube.com/rAWDvz7SiCs</a
-          >
-        </video>
+            Your browser does not support the video tag, follow this link:
+            <a
+              class="underline"
+              href="https://www.youtube.com/rAWDvz7SiCs"
+              target="_blank"
+            >
+              <a href="https://www.youtube.com/rAWDvz7SiCs" target="_blank"></a>
+              https://www.youtube.com/rAWDvz7SiCs</a
+            >
+          </video>
         } @placeholder {
-        <img src="assets/lore-keeper.png" alt="Lore Keeper" class="w-full" />
+          <img src="assets/lore-keeper.png" alt="Lore Keeper" class="w-full"/>
         }
 
         <span class="block mt-2">
@@ -85,7 +85,7 @@
             class="underline"
             href="https://www.youtube.com/rAWDvz7SiCs"
             target="_blank"
-            >Youtube</a
+          >Youtube</a
           >
         </span>
       </div>
@@ -97,7 +97,7 @@
       </div>
     </section>
 
-    <hr />
+    <hr/>
     <!--  <div class="text-xs">If online an internet connection is available the app collects anonymous data to improve the-->
     <!--    performances of future releases. Data collected will the model response time.<br>-->
     <!--    Any AdBlocker will block the data collection, if you don't feel comfortable sharing those metrics don't worry :) .-->
