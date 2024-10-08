@@ -118,36 +118,6 @@ export class EngineService {
       const index = texts.indexOf(text);
       this.dispatch(setLoadingDocumentNumber(index + 1));
 
-      // const content = `You are a helpful AI assistant that oragnize summarize with minimum 400 characters documents, this is the doc content: ${text},
-      //       this is the original title of the document: ${originalDocumentTitle}.
-      //       ${
-      //   index !== 0
-      //     ? ` This is the part ${index + 1} of a split document of ${
-      //       texts.length
-      //     },
-      //        ` +
-      //     '. The title has to be: ' +
-      //     this.previousTitle() +
-      //     '-p' +
-      //     String(index + 1).padStart(2, '0')
-      //     : ''
-      // }. Return a json like this:\n
-      //     {\n
-      //       "title": string, //the title of the content. ${
-      //   index !== 0
-      //     ? ' The title MUST be: ' +
-      //     this.previousTitle() +
-      //     '-p' +
-      //     String(index + 1).padStart(2, '0')
-      //     : 'The title should recall the original document name if it is ' +
-      //     'significant otherwise you can use a generic title based on the content'
-      // },\n
-      //       "summary": string //the summary of the content MUST BE MINIMUM 400 characters NO LESS,\n
-      //       "keywords": string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc.\n
-      //       }\n
-      //     Your answer should ONLY contain the json, nothing else.
-      //     `;
-
 
       const content = this.getContentString(text, originalDocumentTitle, index, texts, this.previousTitle());
       console.log('REQUESTING SUMMARY FOR:', content);
@@ -160,8 +130,7 @@ export class EngineService {
           },
           {
             role: 'user',
-            content:
-              'Give me the json, dont add anything else more than the json',
+            content: this.translocoService.translate('aiAssistant.giveMeTheJson')
           },
         ],
         stream: false,

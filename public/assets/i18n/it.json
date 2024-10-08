@@ -1,5 +1,26 @@
 {
   "home": {
     "title": "Il tomo magico che aiuta i Masters a non perdersi informazioni nella propria storia"
+  },
+  "aiAssistant": {
+    "instruction": "Sei un assistente AI utile che organizza e riassume documenti con un minimo di 400 caratteri",
+    "docContent": "questo è il contenuto del documento: {{text}}",
+    "originalTitle": "questo è il titolo originale del documento: {{originalDocumentTitle}}",
+    "splitDocument": {
+      "part": "Questa è la parte {{index}} di un documento diviso in {{totalParts}} parti",
+      "titleInstruction": "Il titolo deve essere: {{previousTitle}}-p{{paddedIndex}}"
+    },
+    "jsonFormat": {
+      "instruction": "Restituisci un JSON come questo:",
+      "title": {
+        "description": "string, //il titolo del contenuto.",
+        "splitInstruction": "Il titolo DEVE essere: {{previousTitle}}-p{{paddedIndex}}",
+        "normalInstruction": "Il titolo dovrebbe richiamare il nome del documento originale se è significativo, altrimenti puoi usare un titolo generico basato sul contenuto"
+      },
+      "summary": "string //il riassunto del contenuto DEVE ESSERE MINIMO 400 caratteri NON MENO",
+      "keywords": "string[] //le parole chiave del contenuto, tutti i concetti importanti dovrebbero essere qui, per esempio Nomi di persone, luoghi, ecc."
+    },
+    "finalInstruction": "La tua risposta deve contenere SOLO il JSON, nient'altro.",
+    "giveMeTheJson": "Dammi solo il JSON, non aggiungere altro."
   }
 }

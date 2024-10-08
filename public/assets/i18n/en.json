@@ -52,6 +52,7 @@
       "summary": "string //the summary of the content MUST BE MINIMUM 400 characters NO LESS",
       "keywords": "string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc."
     },
-    "finalInstruction": "Your answer should ONLY contain the JSON, nothing else."
+    "finalInstruction": "Your answer should ONLY contain the JSON, nothing else.",
+    "giveMeTheJson": "Give me the json, dont add anything else more than the json"
   }
 }
