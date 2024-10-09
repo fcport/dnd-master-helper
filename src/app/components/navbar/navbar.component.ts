@@ -13,11 +13,11 @@ import {TranslocoService} from "@jsverse/transloco";
 })
 export class NavbarComponent {
 
-  select = model('en')
+  select = model(localStorage.getItem('lang') ?? 'en')
   translocoService = inject(TranslocoService);
 
   selectChange = effect(() => {
-    console.log(this.select())
+    localStorage.setItem('lang', this.select())
     this.translocoService.setActiveLang(this.select())
   })
 
