@@ -7,6 +7,7 @@ export class LoggingService {
 
 
   constructor() {
-    
+    //todo start tracking metrics
+
   }
 }

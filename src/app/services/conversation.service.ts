@@ -1,11 +1,12 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { DocumentsService } from './documents.service';
-import { EngineService } from './engine.service';
+import {inject, Injectable, signal} from '@angular/core';
+import {DocumentsService} from './documents.service';
+import {EngineService} from './engine.service';
 import {
   ChatCompletionChunk,
   ChatCompletionRequestBase,
 } from '@mlc-ai/web-llm';
-import { ChatCompletion } from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
+import {ChatCompletion} from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_completion';
+import {TranslocoService} from "@jsverse/transloco";
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,9 @@ import { ChatCompletion } from '@mlc-ai/web-llm/lib/openai_api_protocols/chat_co
 export class ConversationService {
   documentService = inject(DocumentsService);
   documents = this.documentService.documents;
-  content = `You are a wise and helpful Lore Keeper,
-     tasked with guiding the Master of Adventures through the intricate lore of their world.
-     Your role is to answer questions based on the following information about the realm, its characters, and its history.
-     Provide detailed and insightful responses, drawing upon the rich tapestry of lore provided. Always use an austere tone,
-      and never break character.`;
+  translocoService = inject(TranslocoService);
+  content = this.translocoService.translate('conversation.content');
+
   messages = signal<
     { role: 'user' | 'system' | 'assistant'; content: string }[]
   >([
@@ -33,7 +32,11 @@ export class ConversationService {
 
   loadingAnswer = signal(false);
 
+  constructor() {
+  }
+
   async sendMessage(message: string) {
+    console.log(this.content)
     if (!this.engine()) {
       this.messages.update((prev) => [
         ...prev,
@@ -68,7 +71,7 @@ export class ConversationService {
           ...prev,
           {
             role: 'assistant',
-            content: `There are no tomes that i can find that hold the information you seek`,
+            content: this.translocoService.translate('conversation.noDocument'),
           },
         ]);
         this.loadingAnswer.set(false);
@@ -124,14 +127,7 @@ export class ConversationService {
         messages: [
           {
             role: 'system',
-            content:
-              'You are a helpful AI that has to find relevant documents for the user based on their question. ONLY FIND THE INFORMATION IN THE DOCUMENTS GIVEN ' +
-              'Use the documents summary and keywords to select what documents to return. Only return the Ids of the documents as array, ' +
-              'ONLY RETURN THE ARRAY WITH IDS STRINGS LIKE : "["abcde-1234-abcde-1234", "zyzdr-1234-zyzdr-1234" ]". The array should be formed in a JSON FORMAT,' +
-              ' AND ONLY THE _id PROPERTY.' +
-              'IF NO DOCUMENTS IS SELECTED JUST RETURN AN EMPTY ARRAY LIKE THIS "[]". \n' +
-              "ONLY GET INFORMATION FROM THIS DOCUMENTS, DONT DO ANYTHING ELSE. HERE'S THE DOCUMENTS: " +
-              text,
+            content: this.generateAIDocumentFinderPrompt(text),
           },
           {
             role: 'user',
@@ -181,7 +177,7 @@ export class ConversationService {
         .filter((doc) => {
           return documents.find((documentId) => documentId === doc._id);
         })
-        .map((doc) => ({ content: doc.content, title: doc.title }))
+        .map((doc) => ({content: doc.content, title: doc.title}))
     );
 
     const texts = await this.engineService.splitText(relevantDocs, 500, 50);
@@ -197,9 +193,8 @@ export class ConversationService {
           {
             role: 'system',
             content:
-              this.content +
-              '. Answer questions about documents contents Please only use the information provided in the documents. You can deduce or infer things based on that information, but do not add any new details or content that isn\'t explicitly or implicitly present in the documents. Please do not generate or create any new names or characters, and only answer based on that.. IF THERE IS NO RELEVANT INFORMATION IN THE DOCUMENT JUST RETURN "null" NOTHING ELSE.' +
-              ' this is the doc content split in different chunks: ' +
+              this.content + this.translocoService.translate('aiDocumentFinder.answerInstructions') +
+              this.translocoService.translate('aiDocumentFinder.documentChunksIntro') +
               text,
           },
           {
@@ -247,7 +242,22 @@ export class ConversationService {
     console.log('>>> AI replied in TOTAL...', totElapsed);
 
     return response === ''
-      ? 'I could not find an answer to this question in the ancient tomes'
+      ? this.translocoService.translate('conversation.noDocument')
       : response;
+  }
+
+
+  generateAIDocumentFinderPrompt(text: string): string {
+    return (
+      this.translocoService.translate('aiDocumentFinder.instruction') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.documentScope') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.selectionCriteria') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.returnFormat') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.arrayFormat') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.jsonRequirement') + ' ' +
+      this.translocoService.translate('aiDocumentFinder.emptyResult') + '\n' +
+      this.translocoService.translate('aiDocumentFinder.documentIntroduction') + ' ' +
+      text
+    );
   }
 }

@@ -1,13 +1,45 @@
 {
   "home": {
-    "title": "Il tomo magico che aiuta i Masters a non perdersi informazioni nella propria storia"
+    "title": "Il tomo magico che aiuta i maestri a tenere il passo con la loro lore",
+    "whatIsThis": "Cos'è questo?",
+    "whatIsThisText": "Questo è uno strumento che ti aiuta a tenere il passo con la tua lore. Puoi fare domande sulla tua campagna e il custode della lore cercherà di rispondere nel miglior modo possibile. Se l'informazione che chiedi non è nel database del custode della lore, te lo dirà chiaramente. In questo modo puoi migliorare la tua lore, o semplicemente rispondere <span class=\"italic\">\"rapidamente\"</span> ai tuoi giocatori.",
+    "howDoesItWork": "Come funziona",
+    "howDoesItWorkText": "Il Custode della Lore è uno strumento che utilizza un modello di apprendimento automatico per rispondere a domande sulla tua lore. Ma come puoi insegnargli la tua lore? <br/> Puoi caricare file PDF nella sezione \"<a class=\"title underline\" [routerLink]=\"['document-loader']\">Carica Documenti</a>\", e il Custode della Lore li dividerà, li leggerà e imparerà da essi riassumendo i documenti, estraendo parole chiave e memorizzando le informazioni in una memoria interna.",
+    "temporaryLimits": "Limiti (Temporanei)",
+    "temporaryLimitsText": "Sì, purtroppo il Custode della Lore ha alcuni limiti che ho intenzione di affrontare in futuro:",
+    "temporaryLimitsList": {
+      "pdf": "Il Custode della Lore può leggere solo file PDF",
+      "uploading": "Il caricamento dei documenti è un'operazione computazionalmente costosa: più piccoli sono i documenti, più veloce sarà caricarli!",
+      "oneDoc": "Per ora può caricare solo un documento alla volta",
+      "timeForResponse": "Quando fai domande, il custode della lore cercherà tra i documenti salvati, per favore aspettati dei tempi di caricamento e qualche blocco (stai eseguendo un modello di IA sul tuo browser)",
+      "gpuNeeded": "È necessaria una GPU per eseguire il modello"
+    },
+    "videoExample": "Esempio Video",
+    "worksOffline": "Funziona Offline!",
+    "worksOfflineText": "Il Custode della Lore funziona senza alcuna connessione, quindi anche nel più profondo dei dungeon puoi trovare risposte alle tue domande. Dovrai essere online solo la prima volta che carichi la pagina, per scaricare il modello."
+  },
+  "documentLoader": {
+    "uploadDocuments": "Carica nuovi documenti per espandere la lore del tuo mondo, ogni documento sarà utilizzato per ricerche future. Attraverso l'IA sarà possibile creare brevi riassunti dei tuoi documenti che verranno utilizzati per indicizzare gli articoli e per sapere quale documento cercare quando fai una domanda (almeno questa è l'idea).",
+    "uploadDocuments2": "Ogni documento avrà un titolo originale e un titolo, il titolo originale è il nome del documento come è stato caricato, il titolo è il nome che l'IA pensa si adatti al documento.",
+    "uploadDocuments3": "Per favore, aspettati del tempo per l'elaborazione dei documenti, più documenti carichi, più tempo ci vorrà (dipende anche dalle specifiche del tuo PC).",
+    "allDocuments": "Tutti i Documenti",
+    "noDocuments": "Nessun documento caricato ancora",
+    "splittingLoading": "Divisione e caricamento dei documenti",
+    "stopOperation": "Interrompi Operazione",
+    "stopExplain": "Questo interromperà il processo e ricaricherà l'app, ma i documenti salvati saranno al sicuro nella memoria del Custode della Lore"
+  },
+  "askQuestions": {
+    "chatWithTheLoreKeeper": "Chatta con il Custode della Lore",
+    "chatWithTheLoreKeeperText": "Qui puoi fare domande sulla lore della tua campagna. Il custode della lore cercherà di rispondere alle tue domande nel miglior modo possibile. <br> Se l'informazione che chiedi non è nel database del custode della lore, te lo dirà chiaramente. In questo modo puoi migliorare la tua lore.",
+    "loreKeeperWelcome": "Saluti, Stimato Maestro di Avventure. Sono il Custode della Lore, la tua guida fedele attraverso il vasto arazzo della tua immaginazione. In questo spazio sacro, sono pronto ad assisterti nello svelare i segreti intessuti nel tessuto stesso della tua lore. Se cerchi conoscenza di eroi illustri, regni antichi o eventi fatidici, non esitare a invocare la mia saggezza.",
+    "send": "Invia"
   },
   "aiAssistant": {
-    "instruction": "Sei un assistente AI utile che organizza e riassume documenti con un minimo di 400 caratteri",
+    "instruction": "Sei un assistente IA utile che organizza e riassume documenti con un minimo di 400 caratteri",
     "docContent": "questo è il contenuto del documento: {{text}}",
     "originalTitle": "questo è il titolo originale del documento: {{originalDocumentTitle}}",
     "splitDocument": {
-      "part": "Questa è la parte {{index}} di un documento diviso in {{totalParts}} parti",
+      "part": "Questa è la parte {{index}} di un documento diviso in {{totalParts}}",
       "titleInstruction": "Il titolo deve essere: {{previousTitle}}-p{{paddedIndex}}"
     },
     "jsonFormat": {
@@ -15,12 +47,28 @@
       "title": {
         "description": "string, //il titolo del contenuto.",
         "splitInstruction": "Il titolo DEVE essere: {{previousTitle}}-p{{paddedIndex}}",
-        "normalInstruction": "Il titolo dovrebbe richiamare il nome del documento originale se è significativo, altrimenti puoi usare un titolo generico basato sul contenuto"
+        "normalInstruction": "Il titolo dovrebbe richiamare il nome del documento originale se è significativo altrimenti puoi usare un titolo generico basato sul contenuto"
       },
       "summary": "string //il riassunto del contenuto DEVE ESSERE MINIMO 400 caratteri NON MENO",
       "keywords": "string[] //le parole chiave del contenuto, tutti i concetti importanti dovrebbero essere qui, per esempio Nomi di persone, luoghi, ecc."
     },
     "finalInstruction": "La tua risposta deve contenere SOLO il JSON, nient'altro.",
-    "giveMeTheJson": "Dammi solo il JSON, non aggiungere altro."
+    "giveMeTheJson": "Dammi il json, non aggiungere nient'altro oltre al json"
+  },
+  "conversation": {
+    "content": "Sei un saggio e utile Custode della Lore, incaricato di guidare il Maestro delle Avventure attraverso l'intricata lore del loro mondo. Il tuo ruolo è rispondere alle domande basandoti sulle seguenti informazioni sul regno, i suoi personaggi e la sua storia. Fornisci risposte dettagliate e perspicaci, attingendo al ricco arazzo di lore fornito. Usa sempre un tono austero e non uscire mai dal personaggio.",
+    "noDocument": "Non ci sono tomi che posso trovare che contengano l'informazione che cerchi"
+  },
+  "aiDocumentFinder": {
+    "instruction": "Sei un'IA utile che deve trovare documenti rilevanti per l'utente basandosi sulla loro domanda.",
+    "documentScope": "TROVA INFORMAZIONI SOLO NEI DOCUMENTI FORNITI",
+    "selectionCriteria": "Usa il riassunto e le parole chiave dei documenti per selezionare quali documenti restituire.",
+    "returnFormat": "Restituisci solo gli ID dei documenti come array",
+    "arrayFormat": "RESTITUISCI SOLO L'ARRAY CON STRINGHE DI ID COME : [\"abcde-1234-abcde-1234\", \"zyzdr-1234-zyzdr-1234\" ]",
+    "jsonRequirement": "L'array deve essere formato in FORMATO JSON, E SOLO LA PROPRIETÀ _id.",
+    "emptyResult": "SE NON VIENE SELEZIONATO ALCUN DOCUMENTO, RESTITUISCI SEMPLICEMENTE UN ARRAY VUOTO COME QUESTO \"[]\".",
+    "documentIntroduction": "OTTIENI INFORMAZIONI SOLO DA QUESTI DOCUMENTI, NON FARE NIENT'ALTRO. ECCO I DOCUMENTI:",
+    "answerInstructions": "Rispondi alle domande sul contenuto dei documenti. Utilizza solo le informazioni fornite nei documenti. Puoi dedurre o inferire cose basandoti su queste informazioni, ma non aggiungere nuovi dettagli o contenuti che non siano esplicitamente o implicitamente presenti nei documenti. Non generare o creare nuovi nomi o personaggi, e rispondi solo in base a quanto fornito.",
+    "documentChunksIntro": "questo è il contenuto del documento suddiviso in diversi blocchi:"
   }
 }

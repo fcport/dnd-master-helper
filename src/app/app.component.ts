@@ -5,6 +5,7 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
 import {NgOptimizedImage} from "@angular/common";
 import {EngineService} from "./services/engine.service";
 import {LoadingEngineComponent} from "./components/loading-engine/loading-engine.component";
+import {TranslocoService} from "@jsverse/transloco";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,11 @@ export class AppComponent implements OnInit {
   title = 'dnd-master-helper';
   engineService = inject(EngineService);
 
+  translocoService = inject(TranslocoService);
+
 
   constructor() {
+    this.translocoService.setActiveLang('en');
   }
 
   ngOnInit(): void {

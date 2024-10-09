@@ -20,6 +20,9 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       pathToLangs = `assets/i18n/${lang}.json`;
     }
 
+    console.log(pathToLangs)
+
+
     return this.http.get<Translation>(pathToLangs);
   }
 
