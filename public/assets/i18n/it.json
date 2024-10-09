@@ -45,12 +45,12 @@
     "jsonFormat": {
       "instruction": "Restituisci un JSON come questo:",
       "title": {
-        "description": "string, //il titolo del contenuto.",
+        "description": "title : string, //il titolo del contenuto.",
         "splitInstruction": "Il titolo DEVE essere: {{previousTitle}}-p{{paddedIndex}}",
         "normalInstruction": "Il titolo dovrebbe richiamare il nome del documento originale se è significativo altrimenti puoi usare un titolo generico basato sul contenuto"
       },
-      "summary": "string //il riassunto del contenuto DEVE ESSERE MINIMO 400 caratteri NON MENO",
-      "keywords": "string[] //le parole chiave del contenuto, tutti i concetti importanti dovrebbero essere qui, per esempio Nomi di persone, luoghi, ecc."
+      "summary": "summary : string //il riassunto del contenuto DEVE ESSERE MINIMO 400 caratteri NON MENO",
+      "keywords": "keywords : string[] //le parole chiave del contenuto, tutti i concetti importanti dovrebbero essere qui, per esempio Nomi di persone, luoghi, ecc."
     },
     "finalInstruction": "La tua risposta deve contenere SOLO il JSON, nient'altro.",
     "giveMeTheJson": "Dammi il json, non aggiungere nient'altro oltre al json"

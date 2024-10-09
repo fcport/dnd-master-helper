@@ -45,12 +45,12 @@
     "jsonFormat": {
       "instruction": "Return a JSON like this:",
       "title": {
-        "description": "string, //the title of the content.",
+        "description": "title: string, //the title of the content.",
         "splitInstruction": "The title MUST be: {{previousTitle}}-p{{paddedIndex}}",
         "normalInstruction": "The title should recall the original document name if it is significant otherwise you can use a generic title based on the content"
       },
-      "summary": "string //the summary of the content MUST BE MINIMUM 400 characters NO LESS",
-      "keywords": "string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc."
+      "summary": "summary : string //the summary of the content MUST BE MINIMUM 400 characters NO LESS",
+      "keywords": "keywords : string[] //the keywords of the content, all important concepts should be here, for example Names of people, places, etc."
     },
     "finalInstruction": "Your answer should ONLY contain the JSON, nothing else.",
     "giveMeTheJson": "Give me the json, dont add anything else more than the json"
