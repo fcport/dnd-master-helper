@@ -85,6 +85,11 @@ input {
   @apply text-gray-100 focus:outline-none p-2 rounded-lg border-solid border-2 border-gray-800;
 }
 
+input.auth {
+  @apply text-gray-800 focus:outline-none p-2 rounded-lg border-solid border-2 border-gray-800;
+}
+
+
 input[disabled="true"] {
 
   @apply bg-gray-400 cursor-not-allowed focus:outline-none;

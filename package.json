@@ -30,6 +30,8 @@
     "@ng-icons/jam-icons": "^29.5.0",
     "@reduxjs/angular-redux": "^1.0.0",
     "@reduxjs/toolkit": "^2.2.7",
+    "appwrite": "^16.0.2",
+    "openai": "^4.76.3",
     "pdfjs-dist": "^4.6.82",
     "pouchdb": "^9.0.0",
     "redux": "^5.0.0",

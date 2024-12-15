@@ -1,0 +1,33 @@
+<div class="m-auto flex flex-row items-center justify-center flex-wrap mt-10 lg:flex-nowrap lg:mt-0">
+  <div class="flex flex-col gap-2">
+    <h1 class="title text-3xl">ApiKey Setting</h1>
+    <div class="flex flex-col gap-2 flex-wrap">
+      <!--      <div class="flex flex-col gap-1">-->
+      <!--        <label for="name">Name</label>-->
+      <!--        <input id="name" class="auth" [(ngModel)]="name">-->
+      <!--      </div>-->
+
+      <!--      <div class="flex flex-col gap-1">-->
+      <!--        <label for="surname">Surname</label>-->
+      <!--        <input id="surname" class="auth" [(ngModel)]="surname">-->
+      <!--      </div>-->
+
+      <!--      <div class="flex flex-col gap-1">-->
+      <!--        <label for="birthDate">Birth Date</label>-->
+      <!--        <input id="birthDate" class="auth" [(ngModel)]="birthDate">-->
+      <!--      </div>-->
+
+      <div class="flex flex-col gap-1">
+        <label for="openAiKey" class="flex flex-col gap-1"><span>Set OpenAi Key</span> <small>(for safety reasons, this
+          is not
+          persisted)</small></label>
+        <input id="openAiKey" class="auth" [(ngModel)]="apiKey">
+      </div>
+
+      <button class="btn primary" (click)="saveApiKey()">Save ApiKey</button>
+    </div>
+
+
+  </div>
+
+</div>

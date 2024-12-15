@@ -14,13 +14,30 @@
       </section>
 
     </div>
-    <div>
+    <div class="flex flex-row gap-3 items-center mx-2">
       <select id="language"
               class="h-12 nice-borders p-2" [(ngModel)]="select">
         <option value="en">EN</option>
         <option value="it">IT</option>
 
       </select>
+
+
+      <section class="mx-3">
+        @if (!authService.loggedInUser) {
+          <a [routerLink]="['login']" routerLinkActive="active"
+             class="text-lg title no-underline hover:underline transition-all"> Login </a>
+        } @else {
+          <div class="flex flex-row gap-4 mx-2">
+            <ng-icon [name]="'faSolidDiceD20'" class="cursor-pointer" [routerLink]="['profile']"></ng-icon>
+            <ng-icon [name]="'jamLogOut'" (click)="logout()" class="cursor-pointer"></ng-icon>
+          </div>
+
+
+        }
+      </section>
+
+
     </div>
   </nav>
 
